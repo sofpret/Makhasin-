@@ -2,132 +2,82 @@
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
-
-const timeline = [
-  {
-    year: "2022",
-    title: "Mulai kuliah",
-    desc: "Masuk jurusan Manajemen Pendidikan. Di sini gue sadar bahwa administrasi dan sistem punya bahasa yang sama.",
-  },
-  {
-    year: "2022",
-    title: "Mulai belajar networking",
-    desc: "Belajar mandiri dari YouTube, dokumentasi Cisco, dan forum. Pertama kali setup lab virtual dengan GNS3.",
-  },
-  {
-    year: "2023",
-    title: "Lab pertama",
-    desc: "Berhasil konfigurasi VLAN, routing statis, dan NAT di lab simulasi. Dari sini susah balik lagi.",
-  },
-  {
-    year: "2023",
-    title: "Eksplor Linux",
-    desc: "Ubuntu, Debian, bash scripting. Mulai paham kenapa sysadmin selalu senyum-senyum sendiri di depan terminal.",
-  },
-  {
-    year: "2024",
-    title: "Proyek jaringan pertama",
-    desc: "Bantu desain dan implementasi infrastruktur jaringan kecil. Hasilnya? Berjalan. Tidak ada yang lebih memuaskan.",
-  },
-  {
-    year: "2025",
-    title: "Terus belajar",
-    desc: "Masih jalan. Security, monitoring, automation — banyak yang belum disentuh, banyak yang ingin dijelajahi.",
-  },
-];
-
-const interests = [
-  { title: "Network Engineering",   desc: "Routing, switching, protokol. Arsitektur yang menghubungkan segalanya." },
-  { title: "Linux & Sysadmin",      desc: "Server, shell, dan sistem yang berjalan tanpa gangguan." },
-  { title: "Network Security",      desc: "Firewall, IDS, dan berpikir seperti orang yang mau masuk tanpa izin." },
-  { title: "Infrastructure Design", desc: "Merancang topologi yang efisien, skalabel, dan tahan banting." },
-];
 ---
 
-<Layout
-  title="About — Ahmad Makhasin As Shufi"
-  description="Perjalanan, kepribadian, dan hal-hal yang menggerakkan Ahmad Makhasin As Shufi."
->
+<Layout title="About — Ahmad Makhasin As Shufi">
   <Navbar active="about" />
 
-  <main id="main">
-    <!-- Hero about -->
-    <section class="section-wrap">
-      <div class="about-hero">
-        <div class="about-left reveal">
-          <div class="overline">About Me</div>
-          <h1 class="about-title">
-            Dua dunia,<br />
-            <span style="color:#dc1414">satu kepala.</span>
-          </h1>
-        </div>
-        <div class="about-right reveal d2">
-          <p class="about-lead">
-            Nama gue Ahmad Makhasin As Shufi. Secara formal, gue mahasiswa
-            Manajemen Pendidikan. Tapi kalau ditanya passion, jawabannya
-            selalu sama — jaringan, sistem, dan hal-hal yang bergerak di bawah permukaan.
-          </p>
-          <p class="about-body">
-            Gue percaya bahwa latar belakang yang berbeda justru menghasilkan cara
-            berpikir yang lebih kaya. Memahami bagaimana organisasi bekerja
-            membantu gue merancang infrastruktur yang tidak hanya teknis tapi juga
-            masuk akal untuk digunakan orang sungguhan.
-          </p>
-          <p class="about-body">
-            Sampai sekarang masih belajar — dan itu bukan hal yang perlu
-            dimaafkan. Network engineering adalah bidang yang tidak ada habisnya.
-            Setiap kali ada yang dikuasai, ada tiga hal baru yang menunggu.
-          </p>
+  <main class="about-main">
+    <!-- Page header dengan background gelap -->
+    <div class="page-header">
+      <div class="page-header-mesh" aria-hidden="true"></div>
+      <div class="page-header-inner">
+        <div class="overline" style="color:#a78bfa">About</div>
+        <h1 class="page-h1">
+          Dua dunia,<br />
+          <em>satu kepala.</em>
+        </h1>
+      </div>
+    </div>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <!-- Bio -->
+    <section class="about-section" style="background:#f0ecff">
+      <div class="section-wrap">
+        <div class="about-bio-grid">
+          <div class="reveal">
+            <div class="section-tag">Tentang Gue</div>
+            <h2 class="about-section-title">
+              Bukan dua hal<br /><em>yang bertabrakan.</em>
+            </h2>
+          </div>
+          <div class="about-bio-text reveal d2">
+            <p class="about-lead">
+              Nama gue Ahmad Makhasin As Shufi. Secara formal, mahasiswa
+              Manajemen Pendidikan. Tapi kalau ditanya passion, jawabannya
+              selalu sama — jaringan, sistem, dan hal-hal yang bergerak
+              di bawah permukaan.
+            </p>
+            <p>
+              Gue percaya latar belakang yang berbeda justru menghasilkan
+              cara berpikir yang lebih kaya. Memahami bagaimana organisasi
+              bekerja membantu gue merancang infrastruktur yang tidak hanya
+              teknis tapi juga masuk akal untuk digunakan orang sungguhan.
+            </p>
+            <p style="margin-top:16px">
+              Sampai sekarang masih belajar — dan itu bukan hal yang perlu
+              dimaafkan. Network engineering adalah bidang yang tidak ada
+              habisnya. Setiap kali ada yang dikuasai, ada tiga hal baru
+              yang menunggu.
+            </p>
+          </div>
         </div>
       </div>
     </section>
-
-    <div class="divider" style="max-width:1100px;margin:0 auto;padding:0 24px" role="separator">
-      <div style="width:100%;height:1px;background:rgba(255,255,255,0.07);position:relative">
-        <div style="position:absolute;left:0;top:0;height:1px;width:80px;background:#dc1414"></div>
-      </div>
-    </div>
 
     <!-- Interests -->
-    <section class="section-wrap">
-      <div class="overline reveal">Bidang yang diminati</div>
-      <h2 class="section-title reveal d1">Yang membuat<br /><span style="color:#dc1414">gue betah.</span></h2>
+    <section style="background:linear-gradient(180deg,#f0ecff 0%,#e8f4ff 100%);padding:80px 0">
+      <div class="section-wrap">
+        <div class="section-tag reveal">Bidang Minat</div>
+        <h2 class="about-section-title reveal d1" style="margin-bottom:40px">
+          Yang membuat<br /><em>gue betah.</em>
+        </h2>
 
-      <div class="interests-grid">
-        {interests.map((item, i) => (
-          <div class={`card interest-card reveal d${i + 1}`}>
-            <div class="interest-num">0{i + 1}</div>
-            <h3 class="interest-title">{item.title}</h3>
-            <p class="interest-desc">{item.desc}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <div style="max-width:1100px;margin:0 auto;padding:0 24px 0">
-      <div style="width:100%;height:1px;background:rgba(255,255,255,0.07);position:relative">
-        <div style="position:absolute;left:0;top:0;height:1px;width:80px;background:#dc1414"></div>
-      </div>
-    </div>
-
-    <!-- Timeline -->
-    <section class="section-wrap">
-      <div class="overline reveal">Perjalanan</div>
-      <h2 class="section-title reveal d1">Bagaimana<br /><span style="color:#dc1414">sampai di sini.</span></h2>
-
-      <div class="timeline">
-        {timeline.map((item, i) => (
-          <div class={`tl-item reveal d${(i % 4) + 1}`}>
-            <div class="tl-year">{item.year}</div>
-            <div class="tl-line" aria-hidden="true">
-              <div class="tl-dot"></div>
+        <div class="interests-grid">
+          {[
+            { num:"01", title:"Network Engineering",   desc:"Routing, switching, protokol. Arsitektur yang menghubungkan segalanya.", c:"violet" },
+            { num:"02", title:"Linux & Sysadmin",      desc:"Server, shell, dan sistem yang berjalan tanpa gangguan.",              c:"cyan"   },
+            { num:"03", title:"Network Security",      desc:"Firewall, IDS, dan berpikir seperti orang yang mau masuk tanpa izin.", c:"violet" },
+            { num:"04", title:"Infrastructure Design", desc:"Topologi yang efisien, skalabel, dan tahan banting.",                  c:"cyan"   },
+          ].map((item, i) => (
+            <div class={`interest-card card reveal d${i+1}`}>
+              <div class={`int-num int-num--${item.c}`}>{item.num}</div>
+              <h3 class="int-title">{item.title}</h3>
+              <p class="int-desc">{item.desc}</p>
             </div>
-            <div class="tl-content">
-              <h4 class="tl-title">{item.title}</h4>
-              <p class="tl-desc">{item.desc}</p>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   </main>
@@ -136,168 +86,113 @@ const interests = [
 </Layout>
 
 <style>
-  #main { position: relative; z-index: 10; }
+  .about-main { padding-top: 0; }
 
-  /* HERO */
-  .about-hero {
+  .page-header {
+    background: linear-gradient(160deg, #2d1b69, #1a1035, #0f2744);
+    padding: 140px 24px 72px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-header-mesh {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 80% 30%, rgba(139,92,246,0.28) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 70% at 10% 80%, rgba(34,211,238,0.14) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  .page-header-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  @media (min-width: 768px) {
+    .page-header       { padding: 160px 48px 80px; }
+    .page-header-inner { padding: 0 48px; }
+  }
+
+  .page-h1 {
+    font-size: clamp(40px, 8vw, 72px);
+    color: #f0eeff;
+  }
+  .page-h1 em { font-style: normal; color: #22d3ee; }
+
+  /* Bio */
+  .about-bio-grid {
     display: flex;
     flex-direction: column;
     gap: 40px;
   }
 
   @media (min-width: 768px) {
-    .about-hero {
+    .about-bio-grid {
       flex-direction: row;
-      align-items: flex-start;
       gap: 80px;
+      align-items: flex-start;
     }
-    .about-left { flex: 0 0 320px; }
-    .about-right { flex: 1; }
+    .about-bio-grid > *:first-child { flex: 0 0 300px; }
+    .about-bio-grid > *:last-child  { flex: 1; }
   }
 
-  .about-title {
-    font-size: clamp(40px, 7vw, 64px);
+  .about-section-title {
+    font-size: clamp(28px, 5vw, 44px);
+    color: #1a1035;
     margin-top: 8px;
   }
+  .about-section-title em { font-style: normal; color: #7c3aed; }
 
   .about-lead {
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 1.8;
-    color: rgba(240,240,240,0.65);
-    margin-bottom: 20px;
+    color: #4a3f72;
+    margin-bottom: 18px;
   }
 
-  .about-body {
-    font-size: 14.5px;
-    font-weight: 300;
-    line-height: 1.85;
-    color: rgba(240,240,240,0.38);
-    margin-bottom: 16px;
-  }
-
-  /* SECTION TITLE */
-  .section-title {
-    font-size: clamp(32px, 6vw, 52px);
-    margin-bottom: 48px;
-  }
-
-  /* INTERESTS */
+  /* Interests */
   .interests-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1px;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.07);
-    margin-top: 48px;
+    gap: 16px;
   }
 
-  @media (min-width: 640px) {
+  @media (min-width: 560px) {
     .interests-grid { grid-template-columns: 1fr 1fr; }
   }
 
   .interest-card {
-    padding: 32px 28px;
-    background: #080808;
-    border: none;
-    border-radius: 0;
-    transition: background 0.25s;
+    padding: 28px 24px;
   }
-  .interest-card:hover { background: #0d0d0d; }
 
-  .interest-num {
-    font-family: "Syne", sans-serif;
-    font-size: 11px;
+  .int-num {
+    font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.18em;
-    color: #dc1414;
-    margin-bottom: 16px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
   }
+  .int-num--violet { color: #7c3aed; }
+  .int-num--cyan   { color: #0891b2; }
 
-  .interest-title {
+  .int-title {
     font-family: "Syne", sans-serif;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 700;
+    color: #1a1035;
+    margin-bottom: 10px;
     letter-spacing: -0.02em;
-    line-height: 1.2;
-    color: #f0f0f0;
-    margin-bottom: 12px;
+    line-height: 1.25;
   }
 
-  .interest-desc {
+  .int-desc {
     font-size: 13.5px;
-    font-weight: 300;
     line-height: 1.75;
-    color: rgba(240,240,240,0.35);
-  }
-
-  /* TIMELINE */
-  .timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    margin-top: 48px;
-  }
-
-  .tl-item {
-    display: grid;
-    grid-template-columns: 52px 24px 1fr;
-    gap: 0 20px;
-    padding-bottom: 36px;
-  }
-
-  .tl-year {
-    font-family: "Syne", sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    color: #dc1414;
-    letter-spacing: 0.1em;
-    padding-top: 3px;
-    text-align: right;
-  }
-
-  .tl-line {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-  }
-  .tl-line::after {
-    content: '';
-    position: absolute;
-    top: 20px;
-    bottom: -36px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 1px;
-    background: rgba(255,255,255,0.07);
-  }
-  .tl-item:last-child .tl-line::after { display: none; }
-
-  .tl-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #dc1414;
-    margin-top: 5px;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
-  }
-
-  .tl-title {
-    font-family: "Syne", sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    color: #f0f0f0;
-    margin-bottom: 8px;
-  }
-
-  .tl-desc {
-    font-size: 13.5px;
-    font-weight: 300;
-    line-height: 1.75;
-    color: rgba(240,240,240,0.38);
+    color: #6b6080;
   }
 </style>

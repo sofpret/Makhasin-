@@ -1,0 +1,500 @@
+---
+// ── CONFIG ─────────────────────────────
+// Ganti path foto di sini kalau sudah ada:
+// const photoSrc = "/images/anjai.jpg";
+// Kalau belum ada foto, biarkan kosong string
+const photoSrc = "images/anjai.jpg";
+
+const name    = "Ahmad Makhasin As Shufi";
+const role    = "Educational Management";
+const sub     = "Manajemen Pendidikan × Infrastructure";
+const bio     = "Dibentuk dari tekanan, bukan pujian. Bergerak dalam diam, hasil yang berbicara. Nggak kejar validasi, gue bangun standar.";
+// ───────────────────────────────────────
+---
+
+<section class="cover" id="cover" aria-label="Halaman utama">
+  <!-- Mesh gradient background -->
+  <div class="cover-mesh" aria-hidden="true"></div>
+
+  <!-- Floating particles -->
+  <div class="particles" id="particles" aria-hidden="true"></div>
+
+  <!-- Foto / placeholder dengan 3D tilt -->
+  <div class="cover-photo-wrap" aria-hidden="true">
+    <div class="tilt-outer" id="tiltOuter">
+      <div class="tilt-inner" id="tiltInner">
+        {photoSrc ? (
+          <img
+            src={photoSrc}
+            alt={name}
+            class="tilt-img"
+            draggable="false"
+          />
+        ) : (
+          <div class="photo-placeholder">
+            <div class="photo-initials">AM</div>
+            <p class="photo-hint">Taruh foto kamu di sini</p>
+          </div>
+        )}
+        <!-- Shimmer overlay -->
+        <div class="tilt-shimmer" id="tiltShimmer"></div>
+      </div>
+    </div>
+    <!-- Glow di bawah foto -->
+    <div class="photo-glow" aria-hidden="true"></div>
+  </div>
+
+  <!-- Gradient overlay bawah -->
+  <div class="cover-overlay" aria-hidden="true"></div>
+
+  <!-- Konten teks -->
+  <div class="cover-content">
+    <div class="cover-eyebrow">{name}</div>
+
+    <h1 class="cover-h1">
+      {role.split(" ").slice(0, -1).join(" ")}<br />
+      <em>{role.split(" ").slice(-1)[0]}.</em>
+    </h1>
+
+    <p class="cover-sub">{sub}</p>
+
+    <p class="cover-bio">{bio}</p>
+
+    <div class="cover-btns">
+      <a href="/projects" class="btn-main">Lihat Proyek</a>
+      <a href="/public/cv.pdf" download class="btn-ghost-dark">Download CV</a>
+    </div>
+
+    <div class="cover-stats" role="list" aria-label="Statistik singkat">
+      <div class="cs" role="listitem">
+        <span class="cs-num">03<em>+</em></span>
+        <span class="cs-lbl">Tahun belajar</span>
+      </div>
+      <div class="cs-sep" aria-hidden="true"></div>
+      <div class="cs" role="listitem">
+        <span class="cs-num">12<em>+</em></span>
+        <span class="cs-lbl">Proyek selesai</span>
+      </div>
+      <div class="cs-sep" aria-hidden="true"></div>
+      <div class="cs" role="listitem">
+        <span class="cs-num">∞</span>
+        <span class="cs-lbl">Curiosity</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator" aria-hidden="true">
+    <div class="scroll-line">
+      <div class="scroll-line-fill"></div>
+    </div>
+    <span class="scroll-txt">scroll</span>
+  </div>
+</section>
+
+<script>
+  // ── 3D TILT ──────────────────────────
+  const outer  = document.getElementById("tiltOuter");
+  const inner  = document.getElementById("tiltInner");
+  const shimmer = document.getElementById("tiltShimmer");
+
+  if (outer && inner) {
+    const TILT  = 18;
+    const SCALE = 1.04;
+
+    outer.addEventListener("mousemove", (e) => {
+      const r = outer.getBoundingClientRect();
+      const x = (e.clientX - r.left)  / r.width  - 0.5;
+      const y = (e.clientY - r.top)   / r.height - 0.5;
+      inner.style.transform = `rotateY(${x * TILT}deg) rotateX(${-y * TILT}deg) scale(${SCALE})`;
+      inner.style.transition = "transform 0.08s ease-out";
+      if (shimmer) {
+        shimmer.style.background = `radial-gradient(circle at ${(x + 0.5) * 100}% ${(y + 0.5) * 100}%, rgba(255,255,255,0.12) 0%, transparent 60%)`;
+      }
+    });
+
+    outer.addEventListener("mouseleave", () => {
+      inner.style.transform = "rotateY(0deg) rotateX(0deg) scale(1)";
+      inner.style.transition = "transform 0.55s cubic-bezier(0.23, 1, 0.32, 1)";
+      if (shimmer) shimmer.style.background = "none";
+    });
+
+    // Touch tilt (mobile)
+    outer.addEventListener("touchmove", (e) => {
+      const t = e.touches[0];
+      const r = outer.getBoundingClientRect();
+      const x = (t.clientX - r.left)  / r.width  - 0.5;
+      const y = (t.clientY - r.top)   / r.height - 0.5;
+      inner.style.transform = `rotateY(${x * 14}deg) rotateX(${-y * 14}deg) scale(1.03)`;
+      inner.style.transition = "transform 0.08s ease-out";
+    }, { passive: true });
+
+    outer.addEventListener("touchend", () => {
+      inner.style.transform = "rotateY(0deg) rotateX(0deg) scale(1)";
+      inner.style.transition = "transform 0.55s cubic-bezier(0.23, 1, 0.32, 1)";
+    });
+  }
+
+  // ── PARTICLES ────────────────────────
+  const container = document.getElementById("particles");
+  if (container) {
+    const dots = [
+      { size: 8,  color: "#c4b5fd", x: 8,  y: 15, dur: 7,  del: 0   },
+      { size: 5,  color: "#22d3ee", x: 85, y: 20, dur: 9,  del: 1.5 },
+      { size: 10, color: "#a78bfa", x: 15, y: 70, dur: 6,  del: 2   },
+      { size: 6,  color: "#67e8f9", x: 90, y: 65, dur: 11, del: 0.8 },
+      { size: 7,  color: "#c4b5fd", x: 50, y: 88, dur: 8,  del: 3   },
+      { size: 5,  color: "#22d3ee", x: 72, y: 10, dur: 10, del: 1.2 },
+      { size: 9,  color: "#a78bfa", x: 30, y: 40, dur: 7.5,del: 4   },
+      { size: 4,  color: "#67e8f9", x: 62, y: 5,  dur: 12, del: 2.5 },
+    ];
+    dots.forEach((d) => {
+      const el = document.createElement("div");
+      el.className = "particle";
+      el.style.cssText = `
+        width:${d.size}px;height:${d.size}px;
+        background:${d.color};
+        left:${d.x}%;top:${d.y}%;
+        --dur:${d.dur}s;--del:${d.del}s;
+      `;
+      container.appendChild(el);
+    });
+  }
+</script>
+
+<style>
+  /* COVER */
+  .cover {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: linear-gradient(160deg, #2d1b69 0%, #1a1035 45%, #0f2744 100%);
+  }
+
+  /* Mesh */
+  .cover-mesh {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 65% 15%, rgba(139,92,246,0.35) 0%, transparent 60%),
+      radial-gradient(ellipse 55% 75% at 15% 80%, rgba(34,211,238,0.16) 0%, transparent 55%),
+      radial-gradient(ellipse 45% 45% at 92% 75%, rgba(167,139,250,0.2) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  /* Particles */
+  .particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+  :global(.particle) {
+    position: absolute;
+    border-radius: 50%;
+    animation: particleFloat var(--dur, 7s) ease-in-out infinite var(--del, 0s);
+    will-change: transform;
+  }
+  @keyframes particleFloat {
+    0%, 100% { transform: translateY(0) scale(1); opacity: 0.55; }
+    50%       { transform: translateY(-24px) scale(1.15); opacity: 0.9; }
+  }
+
+  /* ── PHOTO ── */
+  .cover-photo-wrap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Di mobile: foto di tengah-atas, blur di bawah krn ada teks overlay */
+  @media (max-width: 767px) {
+    .cover-photo-wrap {
+      align-items: flex-start;
+      padding-top: 90px;
+      opacity: 0.35;
+    }
+  }
+
+  .tilt-outer {
+    perspective: 900px;
+    pointer-events: all;
+    cursor: pointer;
+  }
+
+  .tilt-inner {
+    width: 260px;
+    height: 340px;
+    border-radius: 24px;
+    position: relative;
+    background: linear-gradient(145deg, rgba(45, 27, 105, 0.8), rgba(26, 16, 53, 0.9));
+    border: 1px solid rgba(167, 139, 250, 0.25);
+    overflow: hidden;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  @media (min-width: 768px) {
+    .tilt-inner { width: 300px; height: 390px; }
+  }
+
+  .tilt-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    border-radius: 24px;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .photo-initials {
+    font-family: "Syne", sans-serif;
+    font-size: 72px;
+    font-weight: 800;
+    color: rgba(167, 139, 250, 0.25);
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .photo-hint {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(167, 139, 250, 0.35);
+    line-height: 1;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .tilt-shimmer {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    pointer-events: none;
+    z-index: 2;
+    transition: background 0.1s;
+  }
+
+  .photo-glow {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    height: 80px;
+    background: radial-gradient(ellipse, rgba(139, 92, 246, 0.5) 0%, transparent 70%);
+    filter: blur(16px);
+    pointer-events: none;
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.6; }
+    50%       { opacity: 1; }
+  }
+
+  /* ── OVERLAY ── */
+  .cover-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60%;
+    background: linear-gradient(
+      to top,
+      rgba(13, 6, 26, 0.97) 0%,
+      rgba(13, 6, 26, 0.75) 40%,
+      transparent 100%
+    );
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  /* Di mobile overlay lebih tinggi supaya teks terbaca */
+  @media (max-width: 767px) {
+    .cover-overlay { height: 75%; }
+  }
+
+  /* ── CONTENT ── */
+  .cover-content {
+    position: relative;
+    z-index: 10;
+    padding: 0 24px 44px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .cover-content { padding: 0 48px 56px; }
+  }
+
+  .cover-eyebrow {
+    font-family: "Inter", sans-serif;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #a78bfa;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cover-eyebrow::before {
+    content: '';
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: #a78bfa;
+    flex-shrink: 0;
+  }
+
+  .cover-h1 {
+    font-size: clamp(48px, 11vw, 96px);
+    color: #f0eeff;
+    margin-bottom: 8px;
+  }
+  .cover-h1 em {
+    font-style: normal;
+    color: #22d3ee;
+  }
+
+  .cover-sub {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(240, 238, 255, 0.28);
+    margin-bottom: 18px;
+    line-height: 1;
+  }
+
+  .cover-bio {
+    font-size: 14.5px;
+    line-height: 1.8;
+    color: rgba(240, 238, 255, 0.58);
+    max-width: 440px;
+    margin-bottom: 28px;
+    font-weight: 400;
+  }
+
+  .cover-btns {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  /* Stats */
+  .cover-stats {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  @media (min-width: 480px) {
+    .cover-stats { gap: 0; flex-wrap: nowrap; }
+  }
+
+  .cs { flex-shrink: 0; }
+
+  @media (min-width: 480px) {
+    .cs { padding: 0 28px; }
+    .cs:first-child { padding-left: 0; }
+    .cs:last-child  { padding-right: 0; }
+  }
+
+  .cs-num {
+    display: block;
+    font-family: "Syne", sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: #f0eeff;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .cs-num em { color: #a78bfa; font-style: normal; font-size: 18px; }
+
+  .cs-lbl {
+    display: block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(240, 238, 255, 0.3);
+  }
+
+  .cs-sep {
+    width: 1px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.08);
+    flex-shrink: 0;
+    display: none;
+  }
+  @media (min-width: 480px) { .cs-sep { display: block; } }
+
+  /* ── SCROLL INDICATOR ── */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 32px;
+    right: 28px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.12);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scroll-line-fill {
+    position: absolute;
+    top: -44px;
+    left: 0;
+    width: 100%;
+    height: 44px;
+    background: linear-gradient(to bottom, transparent, #a78bfa);
+    animation: scrollFill 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollFill {
+    0%   { top: -44px; opacity: 0; }
+    20%  { opacity: 1; }
+    100% { top: 44px; opacity: 0; }
+  }
+
+  .scroll-txt {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.22);
+    writing-mode: vertical-rl;
+  }
+</style>

@@ -1,7 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
-import Hero from "../components/Hero.astro";
+import Cover from "../components/Cover.astro";
+import Timeline from "../components/Timeline.astro";
 import Footer from "../components/Footer.astro";
 ---
 
@@ -10,17 +11,9 @@ import Footer from "../components/Footer.astro";
   description="Mahasiswa Manajemen Pendidikan yang serius di network engineering. Cisco, Linux, TCP/IP, dan semua yang ada di antaranya."
 >
   <Navbar active="home" />
-
-  <main id="main">
-    <Hero />
+  <main>
+    <Cover />
+    <Timeline />
   </main>
-
   <Footer />
 </Layout>
-
-<style>
-  #main {
-    position: relative;
-    z-index: 10;
-  }
-</style>

@@ -1,0 +1,424 @@
+---
+const items = [
+  {
+    year: "2022",
+    side: "left",
+    title: "Pertama kenal networking",
+    desc: "Belajar mandiri dari dokumentasi Cisco dan forum. Pertama kali setup lab virtual pakai GNS3 — langsung ketagihan.",
+    color: "violet",
+  },
+  {
+    year: "2022",
+    side: "right",
+    title: "Lab pertama berhasil",
+    desc: "Konfigurasi VLAN, inter-VLAN routing, dan NAT di lab simulasi. Dari sini susah balik lagi ke hal lain.",
+    color: "cyan",
+  },
+  {
+    year: "2023",
+    side: "left",
+    title: "Proyek jaringan pertama",
+    desc: "Bantu desain dan implementasi infrastruktur jaringan kecil. Hasilnya berjalan. Tidak ada yang lebih memuaskan.",
+    color: "violet",
+  },
+  {
+    year: "2023",
+    side: "right",
+    title: "Masuk dunia Linux",
+    desc: "Ubuntu, Debian, bash scripting. Mulai ngerti kenapa sysadmin selalu senyum-senyum sendiri di depan terminal.",
+    color: "cyan",
+  },
+  {
+    year: "2024",
+    side: "left",
+    title: "Masuk Kuliah",
+    desc: "Gatau Kenapa kok Bisa Tergiur untuk Masuk ke Jurusan ini Tapi Mulai Menyadari, Bahwa Pengelolaan itu hakikatnya sama.",
+    color: "violet",
+  },
+  {
+    year: "2025",
+    side: "right",
+    title: "Terus berkembang",
+    desc: "Security, monitoring, automation — banyak yang belum disentuh, banyak yang ingin dijelajahi. Masih jalan.",
+    color: "cyan",
+  },
+];
+
+const skills = [
+  { label: "Cisco IOS",  color: "violet" },
+  { label: "MikroTik",   color: "violet" },
+  { label: "Linux",      color: "cyan"   },
+  { label: "TCP/IP",     color: "cyan"   },
+  { label: "GNS3",       color: "violet" },
+  { label: "Firewall",   color: "cyan"   },
+  { label: "VLAN",       color: "violet" },
+  { label: "OSPF",       color: "cyan"   },
+  { label: "Bash",       color: "violet" },
+  { label: "pfSense",    color: "cyan"   },
+];
+---
+
+<div class="section-divider" aria-hidden="true"></div>
+
+<section class="tl-section" aria-label="Perjalanan">
+  <div class="tl-inner">
+
+    <!-- Header -->
+    <div class="tl-head reveal">
+      <div class="section-tag">Perjalanan</div>
+      <h2 class="tl-title">
+        Bagaimana sampai<br />
+        <em>di sini.</em>
+      </h2>
+      <p class="tl-subtitle">
+        Bukan jalur yang lurus. Tapi setiap titiknya disengaja.
+      </p>
+    </div>
+
+    <!-- Track -->
+    <div class="tl-track" id="tlTrack" role="list" aria-label="Timeline perjalanan">
+      <div class="tl-center-line" aria-hidden="true"></div>
+
+      {items.map((item, i) => (
+        <div
+          class={`tl-item tl-${item.side} reveal d${(i % 4) + 1} ${i === 0 ? "tl-item--active" : ""}`}
+          role="listitem"
+          data-index={i}
+          tabindex="0"
+          aria-label={`${item.year} — ${item.title}`}
+        >
+          {item.side === "left" && (
+            <>
+              <div class="tl-card-wrap tl-card-left">
+                <div class={`tl-card tl-card--${item.color}`}>
+                  <div class="tl-card-year">{item.year}</div>
+                  <h3 class="tl-card-title">{item.title}</h3>
+                  <p class="tl-card-desc">{item.desc}</p>
+                </div>
+              </div>
+              <div class="tl-dot-col">
+                <div class={`tl-dot tl-dot--${item.color}`} aria-hidden="true"></div>
+              </div>
+              <div class="tl-spacer"></div>
+            </>
+          )}
+          {item.side === "right" && (
+            <>
+              <div class="tl-spacer"></div>
+              <div class="tl-dot-col">
+                <div class={`tl-dot tl-dot--${item.color}`} aria-hidden="true"></div>
+              </div>
+              <div class="tl-card-wrap tl-card-right">
+                <div class={`tl-card tl-card--${item.color}`}>
+                  <div class="tl-card-year">{item.year}</div>
+                  <h3 class="tl-card-title">{item.title}</h3>
+                  <p class="tl-card-desc">{item.desc}</p>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <!-- Skills -->
+    <div class="skills-wrap reveal">
+      <div class="skills-label">Tech Stack</div>
+      <div class="skills-chips" role="list" aria-label="Skill yang dikuasai">
+        {skills.map((s) => (
+          <span class={`chip chip-skill chip--${s.color}`} role="listitem">{s.label}</span>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const items = document.querySelectorAll(".tl-item");
+
+  items.forEach((item) => {
+    const activate = () => {
+      items.forEach((i) => i.classList.remove("tl-item--active"));
+      item.classList.add("tl-item--active");
+    };
+
+    item.addEventListener("click", activate);
+    item.addEventListener("keydown", (e) => {
+      if ((e as KeyboardEvent).key === "Enter" || (e as KeyboardEvent).key === " ") {
+        e.preventDefault();
+        activate();
+      }
+    });
+  });
+</script>
+
+<style>
+  /* SECTION */
+  .tl-section {
+    background: linear-gradient(180deg, #f0ecff 0%, #e8f4ff 100%);
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle top decoration */
+  .tl-section::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: -100px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,58,237,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .tl-section::after {
+    content: '';
+    position: absolute;
+    bottom: -150px; right: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(34,211,238,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .tl-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (min-width: 768px) {
+    .tl-inner { padding: 0 48px; }
+  }
+
+  /* HEADER */
+  .tl-head {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .tl-title {
+    font-size: clamp(32px, 6vw, 52px);
+    color: #1a1035;
+    margin-bottom: 12px;
+  }
+  .tl-title em {
+    font-style: normal;
+    color: #7c3aed;
+  }
+
+  .tl-subtitle {
+    font-size: 14.5px;
+    color: #6b6080;
+    font-weight: 400;
+    max-width: 340px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* TRACK */
+  .tl-track {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 64px;
+  }
+
+  .tl-center-line {
+    position: absolute;
+    left: 50%;
+    top: 0; bottom: 0;
+    width: 1.5px;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #c4b5fd 8%,
+      #c4b5fd 92%,
+      transparent 100%
+    );
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  /* Mobile: single column */
+  @media (max-width: 599px) {
+    .tl-center-line { left: 16px; }
+  }
+
+  /* ITEM */
+  .tl-item {
+    display: grid;
+    grid-template-columns: 1fr 24px 1fr;
+    gap: 0 16px;
+    padding-bottom: 36px;
+    cursor: pointer;
+    outline: none;
+  }
+
+  /* Mobile: semua ke kanan */
+  @media (max-width: 599px) {
+    .tl-item {
+      grid-template-columns: 32px 1fr;
+      gap: 0 14px;
+    }
+    .tl-spacer { display: none; }
+    .tl-dot-col { order: 1; }
+    .tl-card-wrap { order: 2; }
+    .tl-card-left,
+    .tl-card-right { grid-column: unset; }
+  }
+
+  .tl-spacer { flex: 1; }
+
+  .tl-dot-col {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* CARD WRAP */
+  .tl-card-wrap { display: flex; align-items: flex-start; }
+  .tl-card-left  { justify-content: flex-end; }
+  .tl-card-right { justify-content: flex-start; }
+
+  /* CARD */
+  .tl-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 18px 20px;
+    border: 1.5px solid rgba(124, 58, 237, 0.12);
+    box-shadow: 0 3px 18px rgba(124, 58, 237, 0.08);
+    max-width: 280px;
+    width: 100%;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.3s ease,
+                border-color 0.3s ease,
+                opacity 0.3s ease;
+    transform: translateY(6px);
+    opacity: 0.65;
+  }
+
+  @media (max-width: 599px) {
+    .tl-card { max-width: 100%; }
+  }
+
+  .tl-item--active .tl-card,
+  .tl-item:hover .tl-card {
+    transform: translateY(0) scale(1.02);
+    opacity: 1;
+    box-shadow: 0 10px 32px rgba(124, 58, 237, 0.18);
+    border-color: rgba(124, 58, 237, 0.32);
+  }
+
+  .tl-card--cyan.tl-item--active,
+  .tl-item--active .tl-card--cyan,
+  .tl-item:hover .tl-card--cyan {
+    border-color: rgba(34, 211, 238, 0.4);
+    box-shadow: 0 10px 32px rgba(34, 211, 238, 0.16);
+  }
+
+  .tl-card-year {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #7c3aed;
+    margin-bottom: 7px;
+  }
+
+  .tl-card--cyan .tl-card-year { color: #0891b2; }
+
+  .tl-card-title {
+    font-family: "Syne", sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1035;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+    margin-bottom: 7px;
+  }
+
+  .tl-card-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #6b6080;
+    font-weight: 400;
+  }
+
+  /* DOT */
+  .tl-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #e8e0ff;
+    border: 2px solid #a78bfa;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    flex-shrink: 0;
+  }
+
+  .tl-dot--cyan {
+    background: #e0f9fd;
+    border-color: #22d3ee;
+  }
+
+  .tl-item--active .tl-dot--violet,
+  .tl-item:hover .tl-dot--violet {
+    background: #7c3aed;
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 5px rgba(124, 58, 237, 0.18);
+    transform: scale(1.25);
+  }
+
+  .tl-item--active .tl-dot--cyan,
+  .tl-item:hover .tl-dot--cyan {
+    background: #22d3ee;
+    border-color: #22d3ee;
+    box-shadow: 0 0 0 5px rgba(34, 211, 238, 0.18);
+    transform: scale(1.25);
+  }
+
+  /* SKILLS */
+  .skills-wrap {
+    text-align: center;
+    padding-top: 16px;
+  }
+
+  .skills-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #a78bfa;
+    margin-bottom: 16px;
+  }
+
+  .skills-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .chip-skill {
+    transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .chip--cyan {
+    color: #0891b2;
+    border-color: rgba(34, 211, 238, 0.25);
+    box-shadow: 0 2px 8px rgba(34, 211, 238, 0.08);
+  }
+  .chip--cyan:hover {
+    background: #22d3ee;
+    color: #fff;
+    border-color: #22d3ee;
+    box-shadow: 0 6px 18px rgba(34, 211, 238, 0.35);
+  }
+</style>

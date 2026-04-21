@@ -4,87 +4,92 @@ import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 ---
 
-<Layout
-  title="Contact — Ahmad Makhasin As Shufi"
-  description="Hubungi Ahmad Makhasin As Shufi untuk kolaborasi, diskusi, atau apapun."
->
+<Layout title="Contact — Ahmad Makhasin As Shufi">
   <Navbar active="contact" />
 
-  <main id="main">
-    <section class="section-wrap">
-      <div class="contact-layout">
-        <div class="contact-left reveal">
-          <div class="overline">Kontak</div>
-          <h1 class="contact-title">
-            Ada yang ingin<br />
-            <span style="color:#dc1414">dibicarakan?</span>
-          </h1>
-          <p class="contact-desc">
-            Gue terbuka untuk diskusi seputar networking, kolaborasi proyek,
-            atau sekadar ngobrol soal teknologi. Kirim pesan — gue baca semua.
-          </p>
+  <main>
+    <div class="page-header">
+      <div class="page-header-mesh" aria-hidden="true"></div>
+      <div class="page-header-inner">
+        <div class="overline" style="color:#a78bfa">Kontak</div>
+        <h1 class="page-h1">
+          Ada yang ingin<br />
+          <em>dibicarakan?</em>
+        </h1>
+      </div>
+    </div>
 
-          <div class="contact-links">
-            <a href="mailto:hello@ahmadmakhasin.dev" class="contact-item">
-              <div class="contact-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              </div>
-              <div>
-                <div class="contact-label">Email</div>
-                <div class="contact-val">hello@ahmadmakhasin.dev</div>
-              </div>
-            </a>
+    <div class="section-divider" aria-hidden="true"></div>
 
-            <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" class="contact-item">
-              <div class="contact-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-              </div>
-              <div>
-                <div class="contact-label">LinkedIn</div>
-                <div class="contact-val">Ahmad Makhasin As Shufi</div>
-              </div>
-            </a>
+    <section style="background:linear-gradient(180deg,#f0ecff 0%,#e8f4ff 100%);padding:80px 0 100px">
+      <div class="section-wrap">
+        <div class="contact-grid">
 
-            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" class="contact-item">
-              <div class="contact-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              </div>
-              <div>
-                <div class="contact-label">GitHub</div>
-                <div class="contact-val">github.com/yourusername</div>
-              </div>
-            </a>
+          <!-- Kiri: info -->
+          <div class="contact-info reveal">
+            <p class="contact-desc">
+              Terbuka untuk diskusi soal networking, kolaborasi proyek,
+              atau sekadar ngobrol soal teknologi. Kirim pesan — gue baca semua.
+            </p>
+
+            <div class="contact-items">
+              <a href="mailto:asshufi963@gmail.com" class="contact-item">
+                <div class="ci-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
+                <div>
+                  <div class="ci-label">Email</div>
+                  <div class="ci-val">asshufi963@gmail.com</div>
+                </div>
+              </a>
+
+              <a href="https://linkedin.com/in/makhasin" target="_blank" rel="noopener noreferrer" class="contact-item">
+                <div class="ci-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                </div>
+                <div>
+                  <div class="ci-label">LinkedIn</div>
+                  <div class="ci-val">Ahmad Makhasin As Shufi</div>
+                </div>
+              </a>
+
+              <a href="https://github.com/sofpret" target="_blank" rel="noopener noreferrer" class="contact-item">
+                <div class="ci-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                </div>
+                <div>
+                  <div class="ci-label">GitHub</div>
+                  <div class="ci-val">github.com/sofpret</div>
+                </div>
+              </a>
+            </div>
           </div>
-        </div>
 
-        <!-- Form kanan -->
-        <div class="contact-right reveal d2">
-          <form class="contact-form" id="contact-form" novalidate>
-            <div class="form-group">
-              <label for="name" class="form-label">Nama</label>
-              <input type="text" id="name" name="name" class="form-input" placeholder="Nama kamu" required autocomplete="name" />
-            </div>
-
-            <div class="form-group">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" id="email" name="email" class="form-input" placeholder="email@kamu.com" required autocomplete="email" />
-            </div>
-
-            <div class="form-group">
-              <label for="subject" class="form-label">Topik</label>
-              <input type="text" id="subject" name="subject" class="form-input" placeholder="Networking, kolaborasi, dll." />
-            </div>
-
-            <div class="form-group">
-              <label for="message" class="form-label">Pesan</label>
-              <textarea id="message" name="message" class="form-input form-textarea" placeholder="Tulis pesannya di sini..." required rows="5"></textarea>
-            </div>
-
-            <button type="submit" class="btn-main form-submit">
-              Kirim Pesan
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </button>
-          </form>
+          <!-- Kanan: form -->
+          <div class="contact-form-wrap reveal d2">
+            <form id="contact-form" novalidate>
+              <div class="form-group">
+                <label for="name" class="form-label">Nama</label>
+                <input type="text" id="name" name="name" class="form-input" placeholder="Nama kamu" required autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="email@kamu.com" required autocomplete="email" />
+              </div>
+              <div class="form-group">
+                <label for="subject" class="form-label">Topik</label>
+                <input type="text" id="subject" name="subject" class="form-input" placeholder="Networking, kolaborasi, dll." />
+              </div>
+              <div class="form-group">
+                <label for="message" class="form-label">Pesan</label>
+                <textarea id="message" name="message" class="form-input form-textarea" placeholder="Tulis pesannya di sini..." required rows="5"></textarea>
+              </div>
+              <button type="submit" class="btn-main" id="submit-btn">
+                Kirim Pesan
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </section>
@@ -95,12 +100,12 @@ import Footer from "../components/Footer.astro";
 
 <script>
   const form = document.getElementById("contact-form") as HTMLFormElement;
+  const btn  = document.getElementById("submit-btn") as HTMLButtonElement;
   form?.addEventListener("submit", (e) => {
     e.preventDefault();
-    const btn = form.querySelector(".form-submit") as HTMLButtonElement;
     if (btn) {
-      btn.textContent = "Terkirim";
-      btn.style.background = "#10b981";
+      btn.textContent = "Terkirim!";
+      btn.style.background = "linear-gradient(135deg,#059669,#10b981)";
       btn.disabled = true;
       setTimeout(() => {
         btn.textContent = "Kirim Pesan";
@@ -113,142 +118,120 @@ import Footer from "../components/Footer.astro";
 </script>
 
 <style>
-  #main { position: relative; z-index: 10; }
+  .page-header {
+    background: linear-gradient(160deg, #2d1b69, #1a1035, #0f2744);
+    padding: 140px 24px 72px;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-header-mesh {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 80% 30%, rgba(139,92,246,0.28) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 70% at 10% 80%, rgba(34,211,238,0.14) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .page-header-inner {
+    position: relative; z-index: 1;
+    max-width: 1100px; margin: 0 auto;
+  }
+  @media (min-width: 768px) {
+    .page-header { padding: 160px 48px 80px; }
+  }
 
-  .contact-layout {
+  .page-h1 { font-size: clamp(40px,8vw,72px); color: #f0eeff; }
+  .page-h1 em { font-style:normal; color: #22d3ee; }
+
+  .contact-grid {
     display: flex;
     flex-direction: column;
-    gap: 56px;
+    gap: 48px;
   }
-
-  @media (min-width: 900px) {
-    .contact-layout {
-      flex-direction: row;
-      align-items: flex-start;
-      gap: 80px;
-    }
-    .contact-left { flex: 0 0 380px; }
-    .contact-right { flex: 1; }
-  }
-
-  .contact-title {
-    font-size: clamp(36px, 6vw, 56px);
-    margin-bottom: 20px;
+  @media (min-width: 768px) {
+    .contact-grid { flex-direction: row; gap: 72px; align-items: flex-start; }
+    .contact-info { flex: 0 0 320px; }
+    .contact-form-wrap { flex: 1; }
   }
 
   .contact-desc {
     font-size: 14.5px;
-    font-weight: 300;
     line-height: 1.8;
-    color: rgba(240,240,240,0.38);
-    margin-bottom: 40px;
-    max-width: 340px;
+    color: #6b6080;
+    margin-bottom: 32px;
+    max-width: 300px;
   }
 
-  .contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
+  .contact-items { display: flex; flex-direction: column; gap: 4px; }
 
   .contact-item {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 16px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(124,58,237,0.1);
     text-decoration: none;
-    transition: padding-left 0.25s;
+    transition: padding-left 0.22s;
+    cursor: pointer;
   }
-  .contact-item:hover { padding-left: 6px; }
   .contact-item:last-child { border-bottom: none; }
+  .contact-item:hover { padding-left: 6px; }
 
-  .contact-icon {
-    width: 40px;
-    height: 40px;
-    border: 1px solid rgba(255,255,255,0.07);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(240,240,240,0.4);
+  .ci-icon {
+    width: 40px; height: 40px;
+    background: #fff;
+    border: 1.5px solid rgba(124,58,237,0.16);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #a89cc0;
     flex-shrink: 0;
-    transition: color 0.2s, border-color 0.2s;
+    transition: all 0.22s;
   }
-  .contact-item:hover .contact-icon {
-    color: #dc1414;
-    border-color: rgba(220,20,20,0.35);
-  }
-
-  .contact-label {
-    font-family: "Inter", sans-serif;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(240,240,240,0.25);
-    margin-bottom: 3px;
+  .contact-item:hover .ci-icon {
+    background: #7c3aed;
+    border-color: #7c3aed;
+    color: #fff;
   }
 
-  .contact-val {
-    font-family: "Inter", sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    color: rgba(240,240,240,0.65);
+  .ci-label {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: #a89cc0; margin-bottom: 3px;
   }
+  .ci-val { font-size: 14px; font-weight: 500; color: #4a3f72; }
 
-  /* FORM */
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
+  /* Form */
+  form { display: flex; flex-direction: column; gap: 18px; }
 
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+  .form-group { display: flex; flex-direction: column; gap: 7px; }
 
   .form-label {
-    font-family: "Inter", sans-serif;
-    font-size: 10.5px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(240,240,240,0.35);
+    font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: #a89cc0;
   }
 
   .form-input {
     font-family: "Inter", sans-serif;
-    font-size: 14px;
-    font-weight: 300;
-    color: rgba(240,240,240,0.8);
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
+    font-size: 14px; font-weight: 400;
+    color: #1a1035;
+    background: #fff;
+    border: 1.5px solid rgba(124,58,237,0.14);
+    border-radius: 10px;
     padding: 12px 16px;
     outline: none;
     width: 100%;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
     appearance: none;
     -webkit-appearance: none;
-    border-radius: 0;
   }
-
-  .form-input::placeholder {
-    color: rgba(240,240,240,0.18);
-  }
-
+  .form-input::placeholder { color: #c4b9d8; }
   .form-input:focus {
-    border-color: rgba(220,20,20,0.45);
+    border-color: rgba(124,58,237,0.45);
+    box-shadow: 0 0 0 3px rgba(124,58,237,0.1);
   }
 
-  .form-textarea {
-    resize: vertical;
-    min-height: 140px;
-  }
+  .form-textarea { resize: vertical; min-height: 130px; }
 
-  .form-submit {
-    align-self: flex-start;
-    margin-top: 8px;
-  }
+  #submit-btn { align-self: flex-start; margin-top: 4px; }
 </style>

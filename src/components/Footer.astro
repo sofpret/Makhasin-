@@ -2,36 +2,42 @@
 const year = new Date().getFullYear();
 
 const socials = [
-  { label: "GitHub",   href: "https://github.com/yourusername",
-    icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>` },
+  { label: "GitHub",   href: "https://github.com/sofpret",
+    icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>` },
   { label: "LinkedIn",  href: "https://linkedin.com/in/yourusername",
-    icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>` },
+    icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>` },
   { label: "Email",    href: "mailto:hello@ahmadmakhasin.dev",
-    icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>` },
+    icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>` },
+];
+
+const links = [
+  { label: "Home",     href: "/" },
+  { label: "About",    href: "/about" },
+  { label: "Projects", href: "/projects" },
+  { label: "Contact",  href: "/contact" },
 ];
 ---
 
 <footer class="footer-wrap">
-  <div class="footer-inner">
-    <div class="divider"></div>
+  <div class="footer-divider-gradient" aria-hidden="true"></div>
 
-    <div class="footer-body">
-      <div class="footer-left">
-        <span class="footer-logo">AMS<span class="red">_</span></span>
-        <p class="footer-desc">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo">AMS<span>_</span></a>
+        <p class="footer-tagline">
           Jaringan bukan sekadar kabel dan paket.<br />
           Ini tentang bagaimana segala sesuatu terhubung.
         </p>
       </div>
 
-      <nav class="footer-nav" aria-label="Footer navigation">
-        <a href="/" class="footer-link">Home</a>
-        <a href="/about" class="footer-link">About</a>
-        <a href="/projects" class="footer-link">Projects</a>
-        <a href="/contact" class="footer-link">Contact</a>
+      <nav class="footer-nav" aria-label="Navigasi footer">
+        {links.map((l) => (
+          <a href={l.href} class="footer-link">{l.label}</a>
+        ))}
       </nav>
 
-      <div class="footer-socials">
+      <div class="footer-socials" aria-label="Media sosial">
         {socials.map((s) => (
           <a
             href={s.href}
@@ -48,40 +54,44 @@ const socials = [
 
     <div class="footer-bottom">
       <p class="footer-copy">© {year} Ahmad Makhasin As Shufi</p>
-      <p class="footer-copy">Built with Astro</p>
+      <p class="footer-copy">SOFPRETTT</p>
     </div>
   </div>
 </footer>
 
 <style>
   .footer-wrap {
+    background: #f0ecff;
     position: relative;
-    z-index: 10;
-    padding: 0 24px 40px;
   }
 
-  @media (min-width: 768px) {
-    .footer-wrap { padding: 0 48px 48px; }
+  .footer-divider-gradient {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #a78bfa, #22d3ee, transparent);
   }
 
   .footer-inner {
     max-width: 1100px;
     margin: 0 auto;
-  }
-
-  .footer-body {
-    display: flex;
-    flex-direction: column;
-    gap: 36px;
-    padding: 40px 0 32px;
+    padding: 48px 24px 32px;
   }
 
   @media (min-width: 768px) {
-    .footer-body {
+    .footer-inner { padding: 56px 48px 36px; }
+  }
+
+  .footer-top {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    margin-bottom: 36px;
+  }
+
+  @media (min-width: 768px) {
+    .footer-top {
       flex-direction: row;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 48px;
     }
   }
 
@@ -89,67 +99,76 @@ const socials = [
     font-family: "Syne", sans-serif;
     font-weight: 800;
     font-size: 18px;
-    letter-spacing: 0.06em;
-    color: #f0f0f0;
+    letter-spacing: 0.05em;
+    color: #1a1035;
+    text-decoration: none;
     display: block;
     margin-bottom: 12px;
+    transition: color 0.2s;
   }
-  .red { color: #dc1414; }
+  .footer-logo span { color: #7c3aed; }
+  .footer-logo:hover { color: #7c3aed; }
 
-  .footer-desc {
+  .footer-tagline {
     font-size: 13.5px;
-    font-weight: 300;
     line-height: 1.75;
-    color: rgba(240,240,240,0.3);
-    max-width: 240px;
+    color: #6b6080;
+    font-weight: 400;
+    max-width: 220px;
   }
 
   .footer-nav {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
   }
 
   .footer-link {
     font-family: "Inter", sans-serif;
     font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
+    font-weight: 600;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(240,240,240,0.35);
+    color: #a89cc0;
     text-decoration: none;
     transition: color 0.2s;
   }
-  .footer-link:hover { color: #dc1414; }
+  .footer-link:hover { color: #7c3aed; }
 
   .footer-socials {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     align-items: flex-start;
+    flex-wrap: wrap;
   }
 
   .social-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 38px;
-    border: 1px solid rgba(255,255,255,0.07);
-    color: rgba(240,240,240,0.4);
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border: 1.5px solid rgba(124, 58, 237, 0.16);
+    border-radius: 50%;
+    color: #a89cc0;
     text-decoration: none;
-    transition: color 0.2s, border-color 0.2s, background 0.2s;
+    box-shadow: 0 2px 10px rgba(124, 58, 237, 0.07);
+    transition: all 0.22s;
   }
   .social-btn:hover {
-    color: #dc1414;
-    border-color: rgba(220,20,20,0.35);
-    background: rgba(220,20,20,0.06);
+    background: #7c3aed;
+    border-color: #7c3aed;
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
   }
 
   .footer-bottom {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    border-top: 1px solid rgba(255,255,255,0.07);
+    border-top: 1px solid rgba(124, 58, 237, 0.1);
     padding-top: 20px;
   }
 
@@ -161,10 +180,8 @@ const socials = [
   }
 
   .footer-copy {
-    font-family: "Inter", sans-serif;
-    font-size: 11.5px;
+    font-size: 12px;
+    color: #a89cc0;
     font-weight: 400;
-    letter-spacing: 0.06em;
-    color: rgba(240,240,240,0.2);
   }
 </style>

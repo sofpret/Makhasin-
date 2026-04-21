@@ -1,25 +1,25 @@
 ---
 interface Props {
   active?: "home" | "about" | "projects" | "contact";
+  variant?: "dark" | "light";
 }
-const { active = "home" } = Astro.props;
+const { active = "home", variant = "dark" } = Astro.props;
 
 const links = [
-  { label: "Home",     href: "/",        key: "home" },
-  { label: "About",    href: "/about",   key: "about" },
-  { label: "Projects", href: "/projects",key: "projects" },
-  { label: "Contact",  href: "/contact", key: "contact" },
+  { label: "Home",     href: "/",         key: "home" },
+  { label: "About",    href: "/about",    key: "about" },
+  { label: "Projects", href: "/projects", key: "projects" },
+  { label: "Contact",  href: "/contact",  key: "contact" },
 ];
 ---
 
-<header class="navbar-wrap">
-  <nav class="navbar-inner" aria-label="Navigasi utama">
+<header class={`navbar-wrap navbar-${variant}`} id="navbar">
+  <div class="navbar-inner">
     <a href="/" class="nav-logo" aria-label="Home">
-      AMS<span class="logo-dot">_</span>
+      AMS<span class="logo-accent">_</span>
     </a>
 
-    <!-- Desktop links -->
-    <div class="nav-links" role="list">
+    <nav class="nav-links" role="list" aria-label="Navigasi utama">
       {links.map((l) => (
         <a
           href={l.href}
@@ -30,17 +30,15 @@ const links = [
           {l.label}
         </a>
       ))}
-    </div>
+    </nav>
 
-    <!-- Mobile hamburger -->
     <button class="hamburger" id="hamburger" aria-label="Buka menu" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
     </button>
-  </nav>
+  </div>
 
-  <!-- Mobile dropdown -->
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     {links.map((l) => (
       <a
@@ -54,34 +52,62 @@ const links = [
 </header>
 
 <script>
-  const btn  = document.getElementById("hamburger");
-  const menu = document.getElementById("mobile-menu");
+  const hamburger = document.getElementById("hamburger");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const navbar     = document.getElementById("navbar");
 
-  btn?.addEventListener("click", () => {
-    const open = menu?.classList.toggle("open");
-    btn.setAttribute("aria-expanded", String(open));
-    btn.classList.toggle("is-open", open ?? false);
+  hamburger?.addEventListener("click", () => {
+    const isOpen = mobileMenu?.classList.toggle("open");
+    hamburger.setAttribute("aria-expanded", String(isOpen));
+    hamburger.classList.toggle("is-open", isOpen ?? false);
   });
+
+  // Ubah style navbar saat scroll melewati cover
+  const onScroll = () => {
+    if (!navbar) return;
+    if (window.scrollY > window.innerHeight * 0.85) {
+      navbar.classList.add("navbar-scrolled");
+    } else {
+      navbar.classList.remove("navbar-scrolled");
+    }
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
 </script>
 
 <style>
   .navbar-wrap {
-    position: relative;
+    position: fixed;
+    top: 0; left: 0; right: 0;
     z-index: 50;
+    transition: background 0.35s, box-shadow 0.35s, backdrop-filter 0.35s;
   }
+
+  /* Scrolled state — sticky style */
+  .navbar-wrap.navbar-scrolled {
+    background: rgba(248, 245, 255, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 1px 0 rgba(124, 58, 237, 0.1);
+  }
+
+  .navbar-wrap.navbar-scrolled .nav-logo { color: #1a1035; }
+  .navbar-wrap.navbar-scrolled .logo-accent { color: #7c3aed; }
+  .navbar-wrap.navbar-scrolled .nav-link { color: rgba(26, 16, 53, 0.45); }
+  .navbar-wrap.navbar-scrolled .nav-link:hover,
+  .navbar-wrap.navbar-scrolled .nav-link--active { color: #7c3aed; }
+  .navbar-wrap.navbar-scrolled .hamburger span { background: #1a1035; }
 
   .navbar-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 22px 24px;
+    padding: 20px 24px;
     max-width: 1100px;
     margin: 0 auto;
-    width: 100%;
   }
 
   @media (min-width: 768px) {
-    .navbar-inner { padding: 28px 48px; }
+    .navbar-inner { padding: 24px 48px; }
   }
 
   /* Logo */
@@ -89,54 +115,44 @@ const links = [
     font-family: "Syne", sans-serif;
     font-weight: 800;
     font-size: 18px;
-    letter-spacing: 0.06em;
-    color: #f0f0f0;
+    letter-spacing: 0.05em;
+    color: #fff;
     text-decoration: none;
-    transition: color 0.2s;
+    transition: opacity 0.2s;
   }
-  .logo-dot { color: #dc1414; }
-  .nav-logo:hover { color: #dc1414; }
+  .nav-logo:hover { opacity: 0.75; }
+  .logo-accent { color: #a78bfa; }
 
-  /* Desktop nav */
+  /* Desktop links */
   .nav-links {
     display: none;
-    gap: 36px;
+    gap: 4px;
     align-items: center;
   }
-
   @media (min-width: 640px) {
     .nav-links { display: flex; }
   }
 
   .nav-link {
     font-family: "Inter", sans-serif;
-    font-size: 11.5px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(240, 240, 240, 0.4);
+    color: rgba(255, 255, 255, 0.5);
     text-decoration: none;
-    transition: color 0.2s;
-    position: relative;
-  }
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: #dc1414;
-    transition: width 0.25s;
+    padding: 7px 16px;
+    border-radius: 100px;
+    transition: color 0.2s, background 0.2s;
   }
   .nav-link:hover {
-    color: rgba(240,240,240,0.85);
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
   }
-  .nav-link:hover::after { width: 100%; }
   .nav-link--active {
-    color: #dc1414;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.12);
   }
-  .nav-link--active::after { width: 100%; }
 
   /* Hamburger */
   .hamburger {
@@ -152,13 +168,18 @@ const links = [
     display: block;
     width: 22px;
     height: 1.5px;
-    background: rgba(240,240,240,0.6);
+    background: rgba(255, 255, 255, 0.7);
     transition: transform 0.3s, opacity 0.3s;
   }
-  .hamburger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); background: #dc1414; }
+  .hamburger.is-open span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+    background: #a78bfa;
+  }
   .hamburger.is-open span:nth-child(2) { opacity: 0; }
-  .hamburger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); background: #dc1414; }
-
+  .hamburger.is-open span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+    background: #a78bfa;
+  }
   @media (min-width: 640px) {
     .hamburger { display: none; }
   }
@@ -169,33 +190,43 @@ const links = [
     flex-direction: column;
     overflow: hidden;
     max-height: 0;
-    transition: max-height 0.35s ease, padding 0.3s;
-    border-top: 1px solid transparent;
+    transition: max-height 0.35s ease;
+    background: rgba(15, 8, 32, 0.96);
+    backdrop-filter: blur(16px);
   }
   .mobile-menu.open {
     max-height: 300px;
-    border-top-color: rgba(255,255,255,0.07);
-    padding: 12px 0;
+    border-top: 1px solid rgba(167, 139, 250, 0.15);
+  }
+  .navbar-wrap.navbar-scrolled .mobile-menu {
+    background: rgba(248, 245, 255, 0.96);
   }
 
   .mobile-link {
     font-family: "Inter", sans-serif;
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(240,240,240,0.4);
+    color: rgba(240, 238, 255, 0.45);
     text-decoration: none;
-    padding: 13px 24px;
-    transition: color 0.2s, background 0.2s;
+    padding: 14px 24px;
     border-left: 2px solid transparent;
+    transition: all 0.2s;
   }
   .mobile-link:hover {
-    color: rgba(240,240,240,0.85);
-    background: rgba(255,255,255,0.03);
+    color: #a78bfa;
+    background: rgba(167, 139, 250, 0.07);
   }
   .mobile-link--active {
-    color: #dc1414;
-    border-left-color: #dc1414;
+    color: #a78bfa;
+    border-left-color: #a78bfa;
+  }
+  .navbar-wrap.navbar-scrolled .mobile-link {
+    color: rgba(26, 16, 53, 0.5);
+  }
+  .navbar-wrap.navbar-scrolled .mobile-link:hover,
+  .navbar-wrap.navbar-scrolled .mobile-link--active {
+    color: #7c3aed;
   }
 </style>

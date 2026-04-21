@@ -4,87 +4,57 @@ import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 
 const projects = [
-  {
-    num: "001",
-    title: "Lab Jaringan Enterprise",
-    desc: "Simulasi jaringan enterprise dengan multi-VLAN, inter-VLAN routing, OSPF, dan NAT menggunakan GNS3. Topologi 3-tier dengan core, distribution, dan access layer.",
-    tags: ["GNS3", "Cisco IOS", "OSPF", "VLAN", "NAT"],
-    status: "Selesai",
-  },
-  {
-    num: "002",
-    title: "Firewall & DMZ Setup",
-    desc: "Konfigurasi pfSense sebagai firewall utama dengan DMZ zone untuk web server. Implementasi rules berbasis zone dan IDS dasar menggunakan Snort.",
-    tags: ["pfSense", "Snort", "DMZ", "Firewall Rules"],
-    status: "Selesai",
-  },
-  {
-    num: "003",
-    title: "Monitoring Jaringan",
-    desc: "Setup monitoring infrastruktur menggunakan Zabbix. Konfigurasi SNMP trap, alert email, dan dashboard visualisasi traffic real-time.",
-    tags: ["Zabbix", "SNMP", "Linux", "Monitoring"],
-    status: "On-going",
-  },
-  {
-    num: "004",
-    title: "MikroTik Hotspot System",
-    desc: "Implementasi sistem hotspot berbasis MikroTik RouterOS untuk lingkungan kampus kecil. User management, bandwidth throttling, dan daily traffic report.",
-    tags: ["MikroTik", "RouterOS", "Hotspot", "Bandwidth"],
-    status: "Selesai",
-  },
-  {
-    num: "005",
-    title: "Bash Automation Scripts",
-    desc: "Kumpulan script bash untuk otomasi task sysadmin — backup otomatis, monitoring disk usage, log cleaner, dan cek koneksi periodik.",
-    tags: ["Bash", "Linux", "Cron", "Automation"],
-    status: "On-going",
-  },
-  {
-    num: "006",
-    title: "IPv6 Migration Lab",
-    desc: "Lab eksplorasi migrasi IPv4 ke IPv6 dengan dual-stack dan tunnel 6in4. Masih eksperimen — banyak yang belum dipahami, tapi itu poinnya.",
-    tags: ["IPv6", "Dual-stack", "Tunnel", "Routing"],
-    status: "Explorasi",
-  },
+  { num:"001", title:"Lab Jaringan Enterprise",   status:"Selesai",    tags:["GNS3","Cisco IOS","OSPF","VLAN","NAT"],       desc:"Simulasi jaringan enterprise dengan multi-VLAN, inter-VLAN routing, OSPF, dan NAT. Topologi 3-tier dengan core, distribution, dan access layer." },
+  { num:"002", title:"Firewall & DMZ Setup",       status:"Selesai",    tags:["pfSense","Snort","DMZ","Firewall Rules"],      desc:"Konfigurasi pfSense sebagai firewall utama dengan DMZ zone untuk web server dan IDS dasar menggunakan Snort." },
+  { num:"003", title:"Monitoring Jaringan",        status:"On-going",   tags:["Zabbix","SNMP","Linux","Monitoring"],         desc:"Setup monitoring infrastruktur menggunakan Zabbix dengan SNMP trap, alert email, dan dashboard visualisasi traffic real-time." },
+  { num:"004", title:"MikroTik Hotspot System",   status:"Selesai",    tags:["MikroTik","RouterOS","Hotspot","Bandwidth"],  desc:"Implementasi sistem hotspot berbasis MikroTik RouterOS untuk lingkungan kampus kecil dengan bandwidth throttling." },
+  { num:"005", title:"Bash Automation Scripts",   status:"On-going",   tags:["Bash","Linux","Cron","Automation"],           desc:"Kumpulan script bash untuk otomasi task sysadmin — backup otomatis, monitoring disk, log cleaner, dan cek koneksi periodik." },
+  { num:"006", title:"IPv6 Migration Lab",        status:"Explorasi",  tags:["IPv6","Dual-stack","Tunnel","Routing"],       desc:"Lab eksplorasi migrasi IPv4 ke IPv6 dengan dual-stack dan tunnel 6in4. Masih eksperimen — banyak yang belum dipahami." },
 ];
 ---
 
-<Layout
-  title="Projects — Ahmad Makhasin As Shufi"
-  description="Lab, proyek, dan eksperimen jaringan Ahmad Makhasin As Shufi."
->
+<Layout title="Projects — Ahmad Makhasin As Shufi">
   <Navbar active="projects" />
 
-  <main id="main">
-    <section class="section-wrap">
-      <div class="overline reveal">Proyek & Lab</div>
-      <h1 class="page-title reveal d1">
-        Yang sudah<br />
-        <span style="color:#dc1414">dikerjakan.</span>
-      </h1>
-      <p class="page-sub reveal d2">
-        Bukan semuanya sempurna. Beberapa masih jalan, beberapa masih
-        eksperimen. Tapi semuanya nyata dan semuanya dipelajari.
-      </p>
+  <main>
+    <div class="page-header">
+      <div class="page-header-mesh" aria-hidden="true"></div>
+      <div class="page-header-inner">
+        <div class="overline" style="color:#a78bfa">Proyek & Lab</div>
+        <h1 class="page-h1">
+          Yang sudah<br />
+          <em>dikerjakan.</em>
+        </h1>
+        <p class="page-sub">
+          Bukan semuanya sempurna. Beberapa masih jalan,
+          beberapa masih eksperimen. Tapi semuanya nyata.
+        </p>
+      </div>
+    </div>
 
-      <div class="projects-grid">
-        {projects.map((p, i) => (
-          <article class={`card project-card reveal d${(i % 3) + 1}`}>
-            <div class="project-header">
-              <span class="project-num">{p.num}</span>
-              <span class={`project-status ${p.status === "Selesai" ? "status-done" : p.status === "On-going" ? "status-ongoing" : "status-explore"}`}>
-                {p.status}
-              </span>
-            </div>
-            <h3 class="project-title">{p.title}</h3>
-            <p class="project-desc">{p.desc}</p>
-            <div class="project-tags">
-              {p.tags.map((t) => (
-                <span class="tag">{t}</span>
-              ))}
-            </div>
-          </article>
-        ))}
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <section style="background:linear-gradient(180deg,#f0ecff 0%,#e8f4ff 100%);padding:80px 0 100px">
+      <div class="section-wrap">
+        <div class="projects-grid">
+          {projects.map((p, i) => (
+            <article class={`project-card card reveal d${(i % 3) + 1}`}>
+              <div class="project-top">
+                <span class="project-num">{p.num}</span>
+                <span class={`project-status status-${p.status === "Selesai" ? "done" : p.status === "On-going" ? "ongoing" : "explore"}`}>
+                  {p.status}
+                </span>
+              </div>
+              <h3 class="project-title">{p.title}</h3>
+              <p class="project-desc">{p.desc}</p>
+              <div class="project-tags">
+                {p.tags.map((t) => (
+                  <span class="chip" style="font-size:10px;padding:4px 10px">{t}</span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   </main>
@@ -93,92 +63,101 @@ const projects = [
 </Layout>
 
 <style>
-  #main { position: relative; z-index: 10; }
-
-  .page-title {
-    font-size: clamp(40px, 8vw, 72px);
-    margin-bottom: 16px;
+  .page-header {
+    background: linear-gradient(160deg, #2d1b69, #1a1035, #0f2744);
+    padding: 140px 24px 72px;
+    position: relative;
+    overflow: hidden;
   }
+  .page-header-mesh {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 80% 30%, rgba(139,92,246,0.28) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 70% at 10% 80%, rgba(34,211,238,0.14) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .page-header-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .page-header { padding: 160px 48px 80px; }
+    .page-header-inner { padding: 0; }
+  }
+
+  .page-h1 {
+    font-size: clamp(40px, 8vw, 72px);
+    color: #f0eeff;
+    margin-bottom: 14px;
+  }
+  .page-h1 em { font-style: normal; color: #22d3ee; }
 
   .page-sub {
     font-size: 14.5px;
-    font-weight: 300;
-    line-height: 1.8;
-    color: rgba(240,240,240,0.38);
-    max-width: 480px;
-    margin-bottom: 56px;
+    color: rgba(240,238,255,0.5);
+    max-width: 360px;
+    font-weight: 400;
+    line-height: 1.75;
   }
 
   .projects-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1px;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.07);
+    gap: 16px;
   }
-
-  @media (min-width: 640px) {
-    .projects-grid { grid-template-columns: 1fr 1fr; }
-  }
-
-  @media (min-width: 1024px) {
-    .projects-grid { grid-template-columns: 1fr 1fr 1fr; }
-  }
+  @media (min-width: 560px) { .projects-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 900px) { .projects-grid { grid-template-columns: 1fr 1fr 1fr; } }
 
   .project-card {
-    padding: 28px 24px;
-    background: #080808;
-    border: none;
-    border-radius: 0;
+    padding: 24px 22px;
     display: flex;
     flex-direction: column;
     gap: 12px;
-    transition: background 0.25s;
-    cursor: default;
   }
-  .project-card:hover { background: #0e0e0e; }
 
-  .project-header {
+  .project-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
   .project-num {
-    font-family: "Syne", sans-serif;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.18em;
-    color: rgba(240,240,240,0.2);
+    color: #a89cc0;
   }
 
   .project-status {
     font-size: 9.5px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    padding: 3px 9px;
+    padding: 3px 10px;
+    border-radius: 100px;
     border: 1px solid;
   }
-
-  .status-done    { color: #10b981; border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.07); }
-  .status-ongoing { color: #f59e0b; border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.07); }
-  .status-explore { color: rgba(240,240,240,0.4); border-color: rgba(255,255,255,0.1); }
+  .status-done    { color: #059669; border-color: rgba(5,150,105,0.3);   background: rgba(5,150,105,0.08); }
+  .status-ongoing { color: #d97706; border-color: rgba(217,119,6,0.3);   background: rgba(217,119,6,0.08); }
+  .status-explore { color: #7c3aed; border-color: rgba(124,58,237,0.25); background: rgba(124,58,237,0.06); }
 
   .project-title {
     font-family: "Syne", sans-serif;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 700;
+    color: #1a1035;
     letter-spacing: -0.02em;
     line-height: 1.25;
-    color: #f0f0f0;
   }
 
   .project-desc {
     font-size: 13px;
-    font-weight: 300;
     line-height: 1.75;
-    color: rgba(240,240,240,0.35);
+    color: #6b6080;
     flex: 1;
   }
 
@@ -186,6 +165,5 @@ const projects = [
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin-top: 4px;
   }
 </style>
