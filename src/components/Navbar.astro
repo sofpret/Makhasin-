@@ -1,0 +1,201 @@
+---
+interface Props {
+  active?: "home" | "about" | "projects" | "contact";
+}
+const { active = "home" } = Astro.props;
+
+const links = [
+  { label: "Home",     href: "/",        key: "home" },
+  { label: "About",    href: "/about",   key: "about" },
+  { label: "Projects", href: "/projects",key: "projects" },
+  { label: "Contact",  href: "/contact", key: "contact" },
+];
+---
+
+<header class="navbar-wrap">
+  <nav class="navbar-inner" aria-label="Navigasi utama">
+    <a href="/" class="nav-logo" aria-label="Home">
+      AMS<span class="logo-dot">_</span>
+    </a>
+
+    <!-- Desktop links -->
+    <div class="nav-links" role="list">
+      {links.map((l) => (
+        <a
+          href={l.href}
+          role="listitem"
+          class={`nav-link ${active === l.key ? "nav-link--active" : ""}`}
+          aria-current={active === l.key ? "page" : undefined}
+        >
+          {l.label}
+        </a>
+      ))}
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button class="hamburger" id="hamburger" aria-label="Buka menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile dropdown -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    {links.map((l) => (
+      <a
+        href={l.href}
+        class={`mobile-link ${active === l.key ? "mobile-link--active" : ""}`}
+      >
+        {l.label}
+      </a>
+    ))}
+  </div>
+</header>
+
+<script>
+  const btn  = document.getElementById("hamburger");
+  const menu = document.getElementById("mobile-menu");
+
+  btn?.addEventListener("click", () => {
+    const open = menu?.classList.toggle("open");
+    btn.setAttribute("aria-expanded", String(open));
+    btn.classList.toggle("is-open", open ?? false);
+  });
+</script>
+
+<style>
+  .navbar-wrap {
+    position: relative;
+    z-index: 50;
+  }
+
+  .navbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .navbar-inner { padding: 28px 48px; }
+  }
+
+  /* Logo */
+  .nav-logo {
+    font-family: "Syne", sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.06em;
+    color: #f0f0f0;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .logo-dot { color: #dc1414; }
+  .nav-logo:hover { color: #dc1414; }
+
+  /* Desktop nav */
+  .nav-links {
+    display: none;
+    gap: 36px;
+    align-items: center;
+  }
+
+  @media (min-width: 640px) {
+    .nav-links { display: flex; }
+  }
+
+  .nav-link {
+    font-family: "Inter", sans-serif;
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(240, 240, 240, 0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #dc1414;
+    transition: width 0.25s;
+  }
+  .nav-link:hover {
+    color: rgba(240,240,240,0.85);
+  }
+  .nav-link:hover::after { width: 100%; }
+  .nav-link--active {
+    color: #dc1414;
+  }
+  .nav-link--active::after { width: 100%; }
+
+  /* Hamburger */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: rgba(240,240,240,0.6);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .hamburger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); background: #dc1414; }
+  .hamburger.is-open span:nth-child(2) { opacity: 0; }
+  .hamburger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); background: #dc1414; }
+
+  @media (min-width: 640px) {
+    .hamburger { display: none; }
+  }
+
+  /* Mobile menu */
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease, padding 0.3s;
+    border-top: 1px solid transparent;
+  }
+  .mobile-menu.open {
+    max-height: 300px;
+    border-top-color: rgba(255,255,255,0.07);
+    padding: 12px 0;
+  }
+
+  .mobile-link {
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(240,240,240,0.4);
+    text-decoration: none;
+    padding: 13px 24px;
+    transition: color 0.2s, background 0.2s;
+    border-left: 2px solid transparent;
+  }
+  .mobile-link:hover {
+    color: rgba(240,240,240,0.85);
+    background: rgba(255,255,255,0.03);
+  }
+  .mobile-link--active {
+    color: #dc1414;
+    border-left-color: #dc1414;
+  }
+</style>

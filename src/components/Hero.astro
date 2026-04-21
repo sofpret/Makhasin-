@@ -1,0 +1,396 @@
+---
+// Hero — Ahmad Makhasin As Shufi
+---
+
+<section class="hero-wrap" aria-label="Perkenalan">
+  <div class="hero-inner">
+
+    <!-- Kiri: teks utama -->
+    <div class="hero-left">
+      <div class="overline">Ahmad Makhasin As Shufi</div>
+
+      <h1 class="hero-title">
+        Network<br />
+        <span class="red-word">Engineer</span><span class="red-word">.</span>
+      </h1>
+
+      <p class="hero-sub">Manajemen Pendidikan &times; Network &amp; Infrastructure</p>
+
+      <p class="hero-bio">
+        Kuliah di jurusan Manajemen Pendidikan, tapi otak gue lebih sering berurusan
+        dengan protokol, topologi, dan sistem yang nggak pernah tidur.
+        Bukan dua dunia yang bertabrakan — justru satu perspektif yang tidak biasa.
+      </p>
+
+      <div class="cta-row">
+        <a href="/projects" class="btn-main">
+          Lihat Proyek
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/public/cv.pdf" download class="btn-ghost">
+          Download CV
+        </a>
+      </div>
+
+      <div class="hero-tags">
+        <span class="tag tag-red">Cisco Networking</span>
+        <span class="tag">Linux</span>
+        <span class="tag">TCP/IP</span>
+        <span class="tag">MikroTik</span>
+        <span class="tag">Firewall</span>
+        <span class="tag">VLAN</span>
+      </div>
+    </div>
+
+    <!-- Kanan: visual teknis -->
+    <div class="hero-right" aria-hidden="true">
+      <div class="tech-box">
+        <div class="tech-header">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="tech-title">network_status.sh</span>
+        </div>
+        <div class="tech-body" id="terminal-body">
+          <!-- Diisi JS -->
+        </div>
+      </div>
+
+      <!-- Meter bar -->
+      <div class="skill-meters">
+        <div class="meter-row">
+          <span class="meter-label">Networking</span>
+          <div class="meter-track">
+            <div class="meter-fill" style="--w:88%"></div>
+          </div>
+          <span class="meter-num">88</span>
+        </div>
+        <div class="meter-row">
+          <span class="meter-label">Linux / Sys</span>
+          <div class="meter-track">
+            <div class="meter-fill" style="--w:75%"></div>
+          </div>
+          <span class="meter-num">75</span>
+        </div>
+        <div class="meter-row">
+          <span class="meter-label">Security</span>
+          <div class="meter-track">
+            <div class="meter-fill" style="--w:65%"></div>
+          </div>
+          <span class="meter-num">65</span>
+        </div>
+        <div class="meter-row">
+          <span class="meter-label">Scripting</span>
+          <div class="meter-track">
+            <div class="meter-fill" style="--w:58%"></div>
+          </div>
+          <span class="meter-num">58</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats bawah -->
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">03<span>+</span></div>
+      <div class="stat-label">Tahun belajar mandiri</div>
+    </div>
+    <div class="stat-sep" aria-hidden="true"></div>
+    <div class="stat-item">
+      <div class="stat-num">12<span>+</span></div>
+      <div class="stat-label">Proyek & lab selesai</div>
+    </div>
+    <div class="stat-sep" aria-hidden="true"></div>
+    <div class="stat-item">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Rasa penasaran</div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Typewriter effect di terminal box
+  const lines = [
+    { text: "$ ping 192.168.1.1", color: "#dc1414", delay: 200 },
+    { text: "PING 192.168.1.1: 56 bytes", color: "rgba(240,240,240,0.5)", delay: 700 },
+    { text: "64 bytes from 192.168.1.1: time=0.8ms", color: "rgba(240,240,240,0.5)", delay: 1200 },
+    { text: "64 bytes from 192.168.1.1: time=0.6ms", color: "rgba(240,240,240,0.5)", delay: 1700 },
+    { text: "", color: "", delay: 2000 },
+    { text: "$ whoami", color: "#dc1414", delay: 2200 },
+    { text: "ahmad_makhasin", color: "rgba(240,240,240,0.85)", delay: 2700 },
+    { text: "", color: "", delay: 2900 },
+    { text: "$ cat roles.txt", color: "#dc1414", delay: 3100 },
+    { text: "Network Engineer (in progress)", color: "#dc6414", delay: 3600 },
+    { text: "Student — Manajemen Pendidikan", color: "#dc6414", delay: 4000 },
+    { text: "", color: "", delay: 4200 },
+    { text: "$ uptime", color: "#dc1414", delay: 4400 },
+    { text: "always learning — no downtime", color: "rgba(240,240,240,0.5)", delay: 4900 },
+    { text: "█", color: "#dc1414", delay: 5300, cursor: true },
+  ];
+
+  const body = document.getElementById("terminal-body");
+  if (body) {
+    lines.forEach(({ text, color, delay, cursor }) => {
+      setTimeout(() => {
+        const line = document.createElement("div");
+        line.style.cssText = `color:${color};font-size:11.5px;font-family:'Inter',monospace;font-weight:${cursor ? 400 : 300};line-height:1.7;${cursor ? "animation:blink 1s step-end infinite" : ""}`;
+        line.textContent = text;
+        body.appendChild(line);
+        body.scrollTop = body.scrollHeight;
+      }, delay);
+    });
+  }
+</script>
+
+<style>
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+
+  @keyframes fillBar {
+    from { width: 0; }
+    to   { width: var(--w); }
+  }
+
+  /* SECTION */
+  .hero-wrap {
+    position: relative;
+    z-index: 10;
+    min-height: calc(100vh - 72px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 24px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .hero-wrap { padding: 48px 48px 80px; }
+  }
+
+  /* LAYOUT INNER */
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    margin-bottom: 56px;
+  }
+
+  @media (min-width: 900px) {
+    .hero-inner {
+      flex-direction: row;
+      align-items: center;
+      gap: 60px;
+    }
+  }
+
+  /* LEFT */
+  .hero-left {
+    flex: 1;
+  }
+
+  .hero-title {
+    font-size: clamp(52px, 12vw, 100px);
+    margin-bottom: 10px;
+  }
+
+  .red-word { color: #dc1414; }
+
+  .hero-sub {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(240,240,240,0.25);
+    margin-bottom: 24px;
+  }
+
+  .hero-bio {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(240,240,240,0.45);
+    margin-bottom: 36px;
+    max-width: 480px;
+    font-weight: 300;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* RIGHT */
+  .hero-right {
+    flex-shrink: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  @media (min-width: 900px) {
+    .hero-right { width: 360px; }
+  }
+
+  /* Terminal box */
+  .tech-box {
+    background: #0d0d0d;
+    border: 1px solid rgba(255,255,255,0.07);
+    overflow: hidden;
+  }
+
+  .tech-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.02);
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .dot.red    { background: #dc1414; }
+  .dot.yellow { background: #f59e0b; }
+  .dot.green  { background: #10b981; }
+
+  .tech-title {
+    font-family: "Inter", monospace;
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(240,240,240,0.25);
+    letter-spacing: 0.06em;
+    margin-left: 6px;
+  }
+
+  .tech-body {
+    padding: 16px;
+    min-height: 200px;
+    max-height: 240px;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  .tech-body::-webkit-scrollbar { display: none; }
+
+  /* Skill meters */
+  .skill-meters {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 18px 20px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .meter-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .meter-label {
+    font-family: "Inter", sans-serif;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(240,240,240,0.35);
+    width: 80px;
+    flex-shrink: 0;
+  }
+
+  .meter-track {
+    flex: 1;
+    height: 2px;
+    background: rgba(255,255,255,0.08);
+    overflow: hidden;
+  }
+
+  .meter-fill {
+    height: 100%;
+    background: #dc1414;
+    width: 0;
+    animation: fillBar 1.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    animation-delay: 0.6s;
+  }
+
+  .meter-num {
+    font-family: "Syne", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #dc1414;
+    width: 24px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* STATS */
+  .hero-stats {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding-top: 32px;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  @media (min-width: 640px) {
+    .hero-stats { gap: 0; flex-wrap: nowrap; }
+  }
+
+  .stat-item {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .stat-num {
+    font-family: "Syne", sans-serif;
+    font-size: clamp(28px, 5vw, 36px);
+    font-weight: 800;
+    color: #f0f0f0;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-num span { color: #dc1414; }
+
+  .stat-label {
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(240,240,240,0.3);
+  }
+
+  .stat-sep {
+    width: 1px;
+    height: 48px;
+    background: rgba(255,255,255,0.07);
+    flex-shrink: 0;
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .stat-sep { display: block; }
+    .stat-item { padding: 0 36px; }
+    .stat-item:first-child { padding-left: 0; }
+    .stat-item:last-child { padding-right: 0; }
+  }
+</style>
