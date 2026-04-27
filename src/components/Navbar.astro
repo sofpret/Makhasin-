@@ -1,9 +1,8 @@
 ---
 interface Props {
   active?: "home" | "about" | "projects" | "contact";
-  variant?: "dark" | "light";
 }
-const { active = "home", variant = "dark" } = Astro.props;
+const { active = "home" } = Astro.props;
 
 const links = [
   { label: "Home",     href: "/",         key: "home" },
@@ -13,38 +12,64 @@ const links = [
 ];
 ---
 
-<header class={`navbar-wrap navbar-${variant}`} id="navbar">
-  <div class="navbar-inner">
-    <a href="/" class="nav-logo" aria-label="Home">
-      AMS<span class="logo-accent">_</span>
-    </a>
+<header class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">AMS<span>_</span></a>
 
-    <nav class="nav-links" role="list" aria-label="Navigasi utama">
-      {links.map((l) => (
-        <a
-          href={l.href}
-          role="listitem"
-          class={`nav-link ${active === l.key ? "nav-link--active" : ""}`}
-          aria-current={active === l.key ? "page" : undefined}
-        >
-          {l.label}
-        </a>
-      ))}
-    </nav>
+    <div class="nav-right">
+      <!-- Desktop links -->
+      <nav class="nav-links" aria-label="Navigasi utama">
+        {links.map((l) => (
+          <a
+            href={l.href}
+            class={`nav-link ${active === l.key ? "nav-link--active" : ""}`}
+            aria-current={active === l.key ? "page" : undefined}
+          >
+            {l.label}
+          </a>
+        ))}
+      </nav>
 
-    <button class="hamburger" id="hamburger" aria-label="Buka menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+      <!-- Dark/Light toggle -->
+      <button
+        class="theme-toggle"
+        onclick="window.__toggleTheme()"
+        aria-label="Toggle dark/light mode"
+        title="Toggle dark/light mode"
+      >
+        <!-- Moon (show on light mode) -->
+        <span class="theme-icon-dark">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </span>
+        <!-- Sun (show on dark mode) -->
+        <span class="theme-icon-light" style="display:none">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </span>
+      </button>
+
+      <!-- Hamburger -->
+      <button class="hamburger" id="hamburger" aria-label="Buka menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 
-  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu">
     {links.map((l) => (
-      <a
-        href={l.href}
-        class={`mobile-link ${active === l.key ? "mobile-link--active" : ""}`}
-      >
+      <a href={l.href} class={`mobile-link ${active === l.key ? "mobile-link--active" : ""}`}>
         {l.label}
       </a>
     ))}
@@ -54,7 +79,7 @@ const links = [
 <script>
   const hamburger = document.getElementById("hamburger");
   const mobileMenu = document.getElementById("mobile-menu");
-  const navbar     = document.getElementById("navbar");
+  const navbar = document.getElementById("navbar");
 
   hamburger?.addEventListener("click", () => {
     const isOpen = mobileMenu?.classList.toggle("open");
@@ -62,96 +87,117 @@ const links = [
     hamburger.classList.toggle("is-open", isOpen ?? false);
   });
 
-  // Ubah style navbar saat scroll melewati cover
-  const onScroll = () => {
+  // Sticky style past cover
+  window.addEventListener("scroll", () => {
     if (!navbar) return;
-    if (window.scrollY > window.innerHeight * 0.85) {
-      navbar.classList.add("navbar-scrolled");
-    } else {
-      navbar.classList.remove("navbar-scrolled");
-    }
-  };
-  window.addEventListener("scroll", onScroll, { passive: true });
+    navbar.classList.toggle("navbar--scrolled", window.scrollY > window.innerHeight * 0.82);
+  }, { passive: true });
 </script>
 
 <style>
-  .navbar-wrap {
+  .navbar {
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 50;
-    transition: background 0.35s, box-shadow 0.35s, backdrop-filter 0.35s;
+    transition: background 0.35s, backdrop-filter 0.35s, box-shadow 0.35s;
   }
 
-  /* Scrolled state — sticky style */
-  .navbar-wrap.navbar-scrolled {
-    background: rgba(248, 245, 255, 0.88);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    box-shadow: 0 1px 0 rgba(124, 58, 237, 0.1);
+  .navbar--scrolled {
+    background: rgba(var(--navbar-bg, 248, 245, 255), 0.88);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 1px 0 var(--border);
   }
 
-  .navbar-wrap.navbar-scrolled .nav-logo { color: #1a1035; }
-  .navbar-wrap.navbar-scrolled .logo-accent { color: #7c3aed; }
-  .navbar-wrap.navbar-scrolled .nav-link { color: rgba(26, 16, 53, 0.45); }
-  .navbar-wrap.navbar-scrolled .nav-link:hover,
-  .navbar-wrap.navbar-scrolled .nav-link--active { color: #7c3aed; }
-  .navbar-wrap.navbar-scrolled .hamburger span { background: #1a1035; }
+  [data-theme="dark"] .navbar--scrolled {
+    background: rgba(15, 13, 26, 0.88);
+  }
 
-  .navbar-inner {
+  .navbar--scrolled .nav-logo { color: var(--text-1); }
+  .navbar--scrolled .nav-logo span { color: var(--violet); }
+  .navbar--scrolled .nav-link { color: var(--text-3); }
+  .navbar--scrolled .nav-link:hover,
+  .navbar--scrolled .nav-link--active { color: var(--violet); }
+  .navbar--scrolled .theme-toggle { color: var(--text-2); border-color: var(--border); }
+  .navbar--scrolled .hamburger span { background: var(--text-1); }
+
+  .nav-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 24px;
+    padding: 18px 20px;
     max-width: 1100px;
     margin: 0 auto;
   }
 
   @media (min-width: 768px) {
-    .navbar-inner { padding: 24px 48px; }
+    .nav-inner { padding: 22px 48px; }
   }
 
-  /* Logo */
   .nav-logo {
-    font-family: "Syne", sans-serif;
-    font-weight: 800;
+    font-family: "Outfit", sans-serif;
+    font-weight: 900;
     font-size: 18px;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     color: #fff;
     text-decoration: none;
     transition: opacity 0.2s;
   }
+  .nav-logo span { color: #a78bfa; }
   .nav-logo:hover { opacity: 0.75; }
-  .logo-accent { color: #a78bfa; }
 
-  /* Desktop links */
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   .nav-links {
     display: none;
-    gap: 4px;
+    gap: 2px;
     align-items: center;
   }
-  @media (min-width: 640px) {
-    .nav-links { display: flex; }
-  }
+  @media (min-width: 640px) { .nav-links { display: flex; } }
 
   .nav-link {
-    font-family: "Inter", sans-serif;
-    font-size: 12px;
+    font-family: "Outfit", sans-serif;
+    font-size: 13px;
     font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.48);
     text-decoration: none;
-    padding: 7px 16px;
+    padding: 7px 14px;
     border-radius: 100px;
     transition: color 0.2s, background 0.2s;
   }
   .nav-link:hover {
     color: #fff;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255,255,255,0.1);
   }
   .nav-link--active {
     color: #fff;
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(255,255,255,0.12);
+  }
+
+  /* Theme toggle */
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.7);
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .theme-toggle:hover {
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+    transform: rotate(20deg);
   }
 
   /* Hamburger */
@@ -163,26 +209,19 @@ const links = [
     border: none;
     cursor: pointer;
     padding: 6px;
+    flex-shrink: 0;
   }
   .hamburger span {
     display: block;
-    width: 22px;
+    width: 20px;
     height: 1.5px;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255,255,255,0.65);
     transition: transform 0.3s, opacity 0.3s;
   }
-  .hamburger.is-open span:nth-child(1) {
-    transform: translateY(6.5px) rotate(45deg);
-    background: #a78bfa;
-  }
+  .hamburger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); background: #a78bfa; }
   .hamburger.is-open span:nth-child(2) { opacity: 0; }
-  .hamburger.is-open span:nth-child(3) {
-    transform: translateY(-6.5px) rotate(-45deg);
-    background: #a78bfa;
-  }
-  @media (min-width: 640px) {
-    .hamburger { display: none; }
-  }
+  .hamburger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); background: #a78bfa; }
+  @media (min-width: 640px) { .hamburger { display: none; } }
 
   /* Mobile menu */
   .mobile-menu {
@@ -191,42 +230,30 @@ const links = [
     overflow: hidden;
     max-height: 0;
     transition: max-height 0.35s ease;
-    background: rgba(15, 8, 32, 0.96);
-    backdrop-filter: blur(16px);
+    background: rgba(15, 8, 32, 0.97);
+    backdrop-filter: blur(18px);
   }
+  [data-theme="light"] .navbar--scrolled + .mobile-menu,
+  .navbar--scrolled .mobile-menu {
+    background: rgba(248, 245, 255, 0.97);
+  }
+  [data-theme="dark"] .mobile-menu { background: rgba(15, 13, 26, 0.97); }
   .mobile-menu.open {
-    max-height: 300px;
-    border-top: 1px solid rgba(167, 139, 250, 0.15);
+    max-height: 280px;
+    border-top: 1px solid rgba(167,139,250,0.14);
+    padding: 8px 0;
   }
-  .navbar-wrap.navbar-scrolled .mobile-menu {
-    background: rgba(248, 245, 255, 0.96);
-  }
-
   .mobile-link {
-    font-family: "Inter", sans-serif;
-    font-size: 13px;
+    font-family: "Outfit", sans-serif;
+    font-size: 14px;
     font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(240, 238, 255, 0.45);
+    letter-spacing: 0.05em;
+    color: rgba(240,238,255,0.45);
     text-decoration: none;
-    padding: 14px 24px;
+    padding: 13px 20px;
     border-left: 2px solid transparent;
     transition: all 0.2s;
   }
-  .mobile-link:hover {
-    color: #a78bfa;
-    background: rgba(167, 139, 250, 0.07);
-  }
-  .mobile-link--active {
-    color: #a78bfa;
-    border-left-color: #a78bfa;
-  }
-  .navbar-wrap.navbar-scrolled .mobile-link {
-    color: rgba(26, 16, 53, 0.5);
-  }
-  .navbar-wrap.navbar-scrolled .mobile-link:hover,
-  .navbar-wrap.navbar-scrolled .mobile-link--active {
-    color: #7c3aed;
-  }
+  .mobile-link:hover { color: #a78bfa; background: rgba(167,139,250,0.06); }
+  .mobile-link--active { color: #a78bfa; border-left-color: #a78bfa; }
 </style>

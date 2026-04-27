@@ -3,10 +3,9 @@ interface Props {
   title?: string;
   description?: string;
 }
-
 const {
   title = "Ahmad Makhasin As Shufi — Network Engineer",
-  description = "Mahasiswa Manajemen Pendidikan yang serius di network engineering. Cisco, Linux, TCP/IP, dan semua yang ada di antaranya.",
+  description = "Mahasiswa Manajemen Pendidikan yang serius di network engineering.",
 } = Astro.props;
 ---
 
@@ -21,28 +20,107 @@ const {
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Dark mode: set sebelum render biar ga flicker -->
+    <script is:inline>
+      (function() {
+        const saved = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = saved || (prefersDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
   </head>
   <body>
     <slot />
 
     <script>
-      // Reveal on scroll
-      const observer = new IntersectionObserver(
+      // ── DARK MODE TOGGLE ─────────────────────
+      window.__toggleTheme = function() {
+        const current = document.documentElement.getAttribute("data-theme");
+        const next    = current === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+        // Update icon di navbar
+        document.querySelectorAll(".theme-icon-dark").forEach(el => {
+          (el as HTMLElement).style.display = next === "dark" ? "none" : "block";
+        });
+        document.querySelectorAll(".theme-icon-light").forEach(el => {
+          (el as HTMLElement).style.display = next === "dark" ? "block" : "none";
+        });
+      };
+
+      // Set initial icon state
+      const initTheme = document.documentElement.getAttribute("data-theme");
+      document.querySelectorAll(".theme-icon-dark").forEach(el => {
+        (el as HTMLElement).style.display = initTheme === "dark" ? "none" : "block";
+      });
+      document.querySelectorAll(".theme-icon-light").forEach(el => {
+        (el as HTMLElement).style.display = initTheme === "dark" ? "block" : "none";
+      });
+
+      // ── REVEAL ON SCROLL ─────────────────────
+      const revealObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((e) => {
             if (e.isIntersecting) {
               e.target.classList.add("visible");
-              observer.unobserve(e.target);
+              revealObserver.unobserve(e.target);
             }
           });
         },
         { threshold: 0.1 }
       );
-      document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+      document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+
+      // ── TYPEWRITER ON SCROLL ─────────────────
+      function typewrite(el: Element) {
+        const text    = (el as HTMLElement).dataset.text || el.textContent || "";
+        const speed   = parseInt((el as HTMLElement).dataset.speed || "38");
+        el.textContent = "";
+        (el as HTMLElement).style.opacity = "1";
+
+        // Add cursor
+        const cursor = document.createElement("span");
+        cursor.className = "tw-cursor";
+        cursor.style.height = window.getComputedStyle(el).fontSize;
+        el.appendChild(cursor);
+
+        let i = 0;
+        const interval = setInterval(() => {
+          if (i < text.length) {
+            el.insertBefore(document.createTextNode(text[i]), cursor);
+            i++;
+          } else {
+            clearInterval(interval);
+            setTimeout(() => cursor.remove(), 1200);
+          }
+        }, speed);
+      }
+
+      const twObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting && !e.target.classList.contains("tw-done")) {
+              e.target.classList.add("tw-done");
+              typewrite(e.target);
+              twObserver.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+
+      document.querySelectorAll(".typewriter").forEach((el) => {
+        // Simpan teks asli ke data-text, kosongkan dulu
+        if (!(el as HTMLElement).dataset.text) {
+          (el as HTMLElement).dataset.text = el.textContent?.trim() || "";
+        }
+        el.textContent = "";
+        (el as HTMLElement).classList.add("tw-ready");
+        twObserver.observe(el);
+      });
     </script>
   </body>
 </html>
