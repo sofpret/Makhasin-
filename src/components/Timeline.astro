@@ -1,82 +1,37 @@
 ---
 const items = [
-  {
-    year: "2022",
-    side: "left",
-    title: "Pertama kenal networking",
-    desc: "Belajar mandiri dari dokumentasi Cisco dan forum. Pertama kali setup lab virtual pakai GNS3 — langsung ketagihan.",
-    color: "violet",
-  },
-  {
-    year: "2022",
-    side: "right",
-    title: "Lab pertama berhasil",
-    desc: "Konfigurasi VLAN, inter-VLAN routing, dan NAT di lab simulasi. Dari sini susah balik lagi ke hal lain.",
-    color: "cyan",
-  },
-  {
-    year: "2023",
-    side: "left",
-    title: "Proyek jaringan pertama",
-    desc: "Bantu desain dan implementasi infrastruktur jaringan kecil. Hasilnya berjalan. Tidak ada yang lebih memuaskan.",
-    color: "violet",
-  },
-  {
-    year: "2023",
-    side: "right",
-    title: "Masuk dunia Linux",
-    desc: "Ubuntu, Debian, bash scripting. Mulai ngerti kenapa sysadmin selalu senyum-senyum sendiri di depan terminal.",
-    color: "cyan",
-  },
-  {
-    year: "2024",
-    side: "left",
-    title: "Masuk Kuliah",
-    desc: "Gatau Kenapa kok Bisa Tergiur untuk Masuk ke Jurusan ini Tapi Mulai Menyadari, Bahwa Pengelolaan itu hakikatnya sama.",
-    color: "violet",
-  },
-  {
-    year: "2025",
-    side: "right",
-    title: "Terus berkembang",
-    desc: "Security, monitoring, automation — banyak yang belum disentuh, banyak yang ingin dijelajahi. Masih jalan.",
-    color: "cyan",
-  },
+  { year:"2022", side:"left",  color:"violet", title:"Mulai kuliah",               desc:"Masuk jurusan Manajemen Pendidikan. Sadar bahwa administrasi dan sistem punya bahasa yang sama." },
+  { year:"2022", side:"right", color:"cyan",   title:"Kenal networking",            desc:"Belajar mandiri dari dokumentasi Cisco dan forum. Setup lab virtual pertama pakai GNS3 — langsung ketagihan." },
+  { year:"2023", side:"left",  color:"violet", title:"Lab pertama berhasil",        desc:"Konfigurasi VLAN, inter-VLAN routing, dan NAT di lab simulasi. Dari sini susah balik lagi." },
+  { year:"2023", side:"right", color:"cyan",   title:"Masuk dunia Linux",           desc:"Ubuntu, Debian, bash scripting. Mulai ngerti kenapa sysadmin selalu senyum di depan terminal." },
+  { year:"2024", side:"left",  color:"violet", title:"Proyek jaringan pertama",     desc:"Implementasi infrastruktur jaringan kecil. Hasilnya berjalan. Tidak ada yang lebih memuaskan." },
+  { year:"2025", side:"right", color:"cyan",   title:"Terus berkembang",            desc:"Security, monitoring, automation — banyak yang belum disentuh, banyak yang ingin dijelajahi." },
 ];
 
 const skills = [
-  { label: "Cisco IOS",  color: "violet" },
-  { label: "MikroTik",   color: "violet" },
-  { label: "Linux",      color: "cyan"   },
-  { label: "TCP/IP",     color: "cyan"   },
-  { label: "GNS3",       color: "violet" },
-  { label: "Firewall",   color: "cyan"   },
-  { label: "VLAN",       color: "violet" },
-  { label: "OSPF",       color: "cyan"   },
-  { label: "Bash",       color: "violet" },
-  { label: "pfSense",    color: "cyan"   },
+  { label:"Cisco IOS", c:"violet" }, { label:"MikroTik",  c:"violet" },
+  { label:"Linux",     c:"cyan"   }, { label:"TCP/IP",    c:"cyan"   },
+  { label:"GNS3",      c:"violet" }, { label:"Firewall",  c:"cyan"   },
+  { label:"VLAN",      c:"violet" }, { label:"OSPF",      c:"cyan"   },
+  { label:"Bash",      c:"violet" }, { label:"pfSense",   c:"cyan"   },
 ];
 ---
 
 <div class="section-divider" aria-hidden="true"></div>
 
-<section class="tl-section" aria-label="Perjalanan">
+<section class="tl-section">
   <div class="tl-inner">
 
-    <!-- Header -->
     <div class="tl-head reveal">
       <div class="section-tag">Perjalanan</div>
       <h2 class="tl-title">
         Bagaimana sampai<br />
         <em>di sini.</em>
       </h2>
-      <p class="tl-subtitle">
-        Bukan jalur yang lurus. Tapi setiap titiknya disengaja.
-      </p>
+      <p class="typewriter tl-sub" data-text="Bukan jalur yang lurus. Tapi setiap titiknya disengaja." data-speed="40"></p>
     </div>
 
-    <!-- Track -->
-    <div class="tl-track" id="tlTrack" role="list" aria-label="Timeline perjalanan">
+    <div class="tl-track" role="list">
       <div class="tl-center-line" aria-hidden="true"></div>
 
       {items.map((item, i) => (
@@ -85,14 +40,13 @@ const skills = [
           role="listitem"
           data-index={i}
           tabindex="0"
-          aria-label={`${item.year} — ${item.title}`}
         >
-          {item.side === "left" && (
+          {item.side === "left" ? (
             <>
-              <div class="tl-card-wrap tl-card-left">
+              <div class="tl-card-wrap tl-left">
                 <div class={`tl-card tl-card--${item.color}`}>
-                  <div class="tl-card-year">{item.year}</div>
-                  <h3 class="tl-card-title">{item.title}</h3>
+                  <div class={`tl-year tl-year--${item.color}`}>{item.year}</div>
+                  <h3 class="tl-card-title typewriter" data-text={item.title} data-speed="42"></h3>
                   <p class="tl-card-desc">{item.desc}</p>
                 </div>
               </div>
@@ -101,17 +55,16 @@ const skills = [
               </div>
               <div class="tl-spacer"></div>
             </>
-          )}
-          {item.side === "right" && (
+          ) : (
             <>
               <div class="tl-spacer"></div>
               <div class="tl-dot-col">
                 <div class={`tl-dot tl-dot--${item.color}`} aria-hidden="true"></div>
               </div>
-              <div class="tl-card-wrap tl-card-right">
+              <div class="tl-card-wrap tl-right">
                 <div class={`tl-card tl-card--${item.color}`}>
-                  <div class="tl-card-year">{item.year}</div>
-                  <h3 class="tl-card-title">{item.title}</h3>
+                  <div class={`tl-year tl-year--${item.color}`}>{item.year}</div>
+                  <h3 class="tl-card-title typewriter" data-text={item.title} data-speed="42"></h3>
                   <p class="tl-card-desc">{item.desc}</p>
                 </div>
               </div>
@@ -122,11 +75,11 @@ const skills = [
     </div>
 
     <!-- Skills -->
-    <div class="skills-wrap reveal">
+    <div class="skills-wrap reveal d2">
       <div class="skills-label">Tech Stack</div>
-      <div class="skills-chips" role="list" aria-label="Skill yang dikuasai">
+      <div class="skills-chips">
         {skills.map((s) => (
-          <span class={`chip chip-skill chip--${s.color}`} role="listitem">{s.label}</span>
+          <span class={`chip ${s.c === "cyan" ? "chip-cyan" : ""}`}>{s.label}</span>
         ))}
       </div>
     </div>
@@ -135,97 +88,57 @@ const skills = [
 </section>
 
 <script>
-  const items = document.querySelectorAll(".tl-item");
-
-  items.forEach((item) => {
+  document.querySelectorAll(".tl-item").forEach((item) => {
     const activate = () => {
-      items.forEach((i) => i.classList.remove("tl-item--active"));
+      document.querySelectorAll(".tl-item").forEach((i) => i.classList.remove("tl-item--active"));
       item.classList.add("tl-item--active");
     };
-
     item.addEventListener("click", activate);
     item.addEventListener("keydown", (e) => {
-      if ((e as KeyboardEvent).key === "Enter" || (e as KeyboardEvent).key === " ") {
-        e.preventDefault();
-        activate();
-      }
+      if ((e as KeyboardEvent).key === "Enter") { e.preventDefault(); activate(); }
     });
   });
 </script>
 
 <style>
-  /* SECTION */
   .tl-section {
-    background: linear-gradient(180deg, #f0ecff 0%, #e8f4ff 100%);
-    padding: 80px 0;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+    padding: 72px 0 80px;
     position: relative;
-    overflow: hidden;
-  }
-
-  /* Subtle top decoration */
-  .tl-section::before {
-    content: '';
-    position: absolute;
-    top: -200px; left: -100px;
-    width: 500px; height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(124,58,237,0.07) 0%, transparent 65%);
-    pointer-events: none;
-  }
-  .tl-section::after {
-    content: '';
-    position: absolute;
-    bottom: -150px; right: -80px;
-    width: 400px; height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(34,211,238,0.07) 0%, transparent 65%);
-    pointer-events: none;
+    transition: background 0.3s;
   }
 
   .tl-inner {
-    max-width: 860px;
+    max-width: 820px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 20px;
     position: relative;
     z-index: 1;
   }
+  @media (min-width: 768px) { .tl-inner { padding: 0 48px; } }
 
-  @media (min-width: 768px) {
-    .tl-inner { padding: 0 48px; }
-  }
-
-  /* HEADER */
-  .tl-head {
-    text-align: center;
-    margin-bottom: 56px;
-  }
+  .tl-head { text-align: center; margin-bottom: 52px; }
 
   .tl-title {
-    font-size: clamp(32px, 6vw, 52px);
-    color: #1a1035;
+    font-size: clamp(30px, 6vw, 48px);
+    color: var(--text-1);
     margin-bottom: 12px;
   }
-  .tl-title em {
-    font-style: normal;
-    color: #7c3aed;
-  }
+  .tl-title em { font-style: normal; color: var(--violet); }
 
-  .tl-subtitle {
+  .tl-sub {
     font-size: 14.5px;
-    color: #6b6080;
-    font-weight: 400;
-    max-width: 340px;
+    color: var(--text-3);
+    max-width: 320px;
     margin: 0 auto;
-    line-height: 1.7;
+    min-height: 1.4em;
   }
 
-  /* TRACK */
   .tl-track {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 0;
-    margin-bottom: 64px;
+    margin-bottom: 60px;
   }
 
   .tl-center-line {
@@ -233,192 +146,118 @@ const skills = [
     left: 50%;
     top: 0; bottom: 0;
     width: 1.5px;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      #c4b5fd 8%,
-      #c4b5fd 92%,
-      transparent 100%
-    );
+    background: linear-gradient(to bottom, transparent 0%, var(--violet-light) 8%, var(--violet-light) 92%, transparent 100%);
     transform: translateX(-50%);
     pointer-events: none;
   }
 
-  /* Mobile: single column */
-  @media (max-width: 599px) {
-    .tl-center-line { left: 16px; }
+  @media (max-width: 539px) {
+    .tl-center-line { left: 14px; }
   }
 
-  /* ITEM */
   .tl-item {
     display: grid;
-    grid-template-columns: 1fr 24px 1fr;
-    gap: 0 16px;
-    padding-bottom: 36px;
+    grid-template-columns: 1fr 20px 1fr;
+    gap: 0 14px;
+    padding-bottom: 32px;
     cursor: pointer;
     outline: none;
   }
 
-  /* Mobile: semua ke kanan */
-  @media (max-width: 599px) {
-    .tl-item {
-      grid-template-columns: 32px 1fr;
-      gap: 0 14px;
-    }
+  @media (max-width: 539px) {
+    .tl-item { grid-template-columns: 28px 1fr; gap: 0 12px; }
     .tl-spacer { display: none; }
-    .tl-dot-col { order: 1; }
-    .tl-card-wrap { order: 2; }
-    .tl-card-left,
-    .tl-card-right { grid-column: unset; }
+    .tl-card-wrap { grid-column: 2; }
+    .tl-dot-col { grid-column: 1; grid-row: 1; }
   }
 
-  .tl-spacer { flex: 1; }
-
-  .tl-dot-col {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 20px;
-    position: relative;
-    z-index: 1;
-  }
-
-  /* CARD WRAP */
   .tl-card-wrap { display: flex; align-items: flex-start; }
-  .tl-card-left  { justify-content: flex-end; }
-  .tl-card-right { justify-content: flex-start; }
+  .tl-left  { justify-content: flex-end; }
+  .tl-right { justify-content: flex-start; }
 
-  /* CARD */
   .tl-card {
-    background: #fff;
-    border-radius: 16px;
-    padding: 18px 20px;
-    border: 1.5px solid rgba(124, 58, 237, 0.12);
-    box-shadow: 0 3px 18px rgba(124, 58, 237, 0.08);
-    max-width: 280px;
+    background: var(--bg-card);
+    border-radius: 14px;
+    padding: 16px 18px;
+    border: 1.5px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    max-width: 270px;
     width: 100%;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-                box-shadow 0.3s ease,
-                border-color 0.3s ease,
-                opacity 0.3s ease;
-    transform: translateY(6px);
-    opacity: 0.65;
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
+                box-shadow 0.3s, border-color 0.3s, opacity 0.3s;
+    transform: translateY(5px);
+    opacity: 0.6;
   }
-
-  @media (max-width: 599px) {
-    .tl-card { max-width: 100%; }
-  }
+  @media (max-width: 539px) { .tl-card { max-width: 100%; } }
 
   .tl-item--active .tl-card,
   .tl-item:hover .tl-card {
     transform: translateY(0) scale(1.02);
     opacity: 1;
-    box-shadow: 0 10px 32px rgba(124, 58, 237, 0.18);
-    border-color: rgba(124, 58, 237, 0.32);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--border-hover);
   }
 
-  .tl-card--cyan.tl-item--active,
-  .tl-item--active .tl-card--cyan,
-  .tl-item:hover .tl-card--cyan {
-    border-color: rgba(34, 211, 238, 0.4);
-    box-shadow: 0 10px 32px rgba(34, 211, 238, 0.16);
+  .tl-year {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    margin-bottom: 6px;
   }
-
-  .tl-card-year {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #7c3aed;
-    margin-bottom: 7px;
-  }
-
-  .tl-card--cyan .tl-card-year { color: #0891b2; }
+  .tl-year--violet { color: var(--violet); }
+  .tl-year--cyan   { color: var(--cyan); }
 
   .tl-card-title {
-    font-family: "Syne", sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: #1a1035;
+    font-family: "Outfit", sans-serif;
+    font-size: 15px; font-weight: 700;
+    color: var(--text-1);
     letter-spacing: -0.01em;
     line-height: 1.25;
     margin-bottom: 7px;
+    min-height: 1.25em;
   }
 
   .tl-card-desc {
-    font-size: 13px;
-    line-height: 1.7;
-    color: #6b6080;
-    font-weight: 400;
+    font-size: 13px; line-height: 1.7;
+    color: var(--text-3); font-weight: 400;
   }
 
-  /* DOT */
+  .tl-dot-col {
+    display: flex; justify-content: center;
+    align-items: flex-start; padding-top: 18px;
+    position: relative; z-index: 1;
+  }
+
   .tl-dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: #e8e0ff;
-    border: 2px solid #a78bfa;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: 13px; height: 13px; border-radius: 50%;
+    background: var(--bg-card);
+    border: 2px solid var(--violet-light);
+    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
     flex-shrink: 0;
   }
-
-  .tl-dot--cyan {
-    background: #e0f9fd;
-    border-color: #22d3ee;
-  }
+  .tl-dot--cyan { border-color: var(--cyan-bright); }
 
   .tl-item--active .tl-dot--violet,
-  .tl-item:hover .tl-dot--violet {
-    background: #7c3aed;
-    border-color: #7c3aed;
-    box-shadow: 0 0 0 5px rgba(124, 58, 237, 0.18);
-    transform: scale(1.25);
+  .tl-item:hover  .tl-dot--violet {
+    background: var(--violet); border-color: var(--violet);
+    box-shadow: 0 0 0 5px rgba(124,58,237,0.18);
+    transform: scale(1.3);
   }
-
   .tl-item--active .tl-dot--cyan,
-  .tl-item:hover .tl-dot--cyan {
-    background: #22d3ee;
-    border-color: #22d3ee;
-    box-shadow: 0 0 0 5px rgba(34, 211, 238, 0.18);
-    transform: scale(1.25);
+  .tl-item:hover  .tl-dot--cyan {
+    background: var(--cyan-bright); border-color: var(--cyan-bright);
+    box-shadow: 0 0 0 5px rgba(34,211,238,0.18);
+    transform: scale(1.3);
   }
 
-  /* SKILLS */
-  .skills-wrap {
-    text-align: center;
-    padding-top: 16px;
-  }
-
+  /* Skills */
+  .skills-wrap { text-align: center; }
   .skills-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #a78bfa;
-    margin-bottom: 16px;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--violet-light); margin-bottom: 14px;
   }
-
   .skills-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-  }
-
-  .chip-skill {
-    transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  .chip--cyan {
-    color: #0891b2;
-    border-color: rgba(34, 211, 238, 0.25);
-    box-shadow: 0 2px 8px rgba(34, 211, 238, 0.08);
-  }
-  .chip--cyan:hover {
-    background: #22d3ee;
-    color: #fff;
-    border-color: #22d3ee;
-    box-shadow: 0 6px 18px rgba(34, 211, 238, 0.35);
+    display: flex; flex-wrap: wrap;
+    gap: 8px; justify-content: center;
   }
 </style>

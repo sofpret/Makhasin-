@@ -8,66 +8,37 @@ import Footer from "../components/Footer.astro";
   <Navbar active="contact" />
 
   <main>
+    <!-- Page header -->
     <div class="page-header">
       <div class="page-header-mesh" aria-hidden="true"></div>
       <div class="page-header-inner">
-        <div class="overline" style="color:#a78bfa">Kontak</div>
-        <h1 class="page-h1">
-          Ada yang ingin<br />
-          <em>dibicarakan?</em>
-        </h1>
+        <div class="overline-label">Kontak</div>
+        <h1 class="page-h1">Ada yang ingin<br /><em>dibicarakan?</em></h1>
+        <p class="page-sub">Gue terbuka untuk diskusi soal networking, kolaborasi, atau apapun.</p>
       </div>
     </div>
 
     <div class="section-divider" aria-hidden="true"></div>
 
-    <section style="background:linear-gradient(180deg,#f0ecff 0%,#e8f4ff 100%);padding:80px 0 100px">
-      <div class="section-wrap">
-        <div class="contact-grid">
+    <!-- Main section: lanyard + form -->
+    <section class="contact-section">
+      <div class="contact-inner">
 
-          <!-- Kiri: info -->
-          <div class="contact-info reveal">
-            <p class="contact-desc">
-              Terbuka untuk diskusi soal networking, kolaborasi proyek,
-              atau sekadar ngobrol soal teknologi. Kirim pesan — gue baca semua.
-            </p>
+        <!-- ── LANYARD SIDE ── -->
+        <div class="lanyard-side">
+          <div class="lanyard-label typewriter" data-text="Tarik kartu ↓" data-speed="45"></div>
+          <canvas id="lanyardCanvas" aria-label="Lanyard interaktif Ahmad Makhasin" role="img"></canvas>
+        </div>
 
-            <div class="contact-items">
-              <a href="mailto:asshufi963@gmail.com" class="contact-item">
-                <div class="ci-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                </div>
-                <div>
-                  <div class="ci-label">Email</div>
-                  <div class="ci-val">asshufi963@gmail.com</div>
-                </div>
-              </a>
-
-              <a href="https://linkedin.com/in/makhasin" target="_blank" rel="noopener noreferrer" class="contact-item">
-                <div class="ci-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                </div>
-                <div>
-                  <div class="ci-label">LinkedIn</div>
-                  <div class="ci-val">Ahmad Makhasin As Shufi</div>
-                </div>
-              </a>
-
-              <a href="https://github.com/sofpret" target="_blank" rel="noopener noreferrer" class="contact-item">
-                <div class="ci-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                </div>
-                <div>
-                  <div class="ci-label">GitHub</div>
-                  <div class="ci-val">github.com/sofpret</div>
-                </div>
-              </a>
-            </div>
+        <!-- ── FORM SIDE ── -->
+        <div class="form-side">
+          <div class="form-header reveal">
+            <h2 class="form-title">Kirim pesan.</h2>
+            <p class="form-desc">Atau lewat kontak di bawah — semua gue baca.</p>
           </div>
 
-          <!-- Kanan: form -->
-          <div class="contact-form-wrap reveal d2">
-            <form id="contact-form" novalidate>
+          <form id="contactForm" class="contact-form reveal d2" novalidate>
+            <div class="form-row">
               <div class="form-group">
                 <label for="name" class="form-label">Nama</label>
                 <input type="text" id="name" name="name" class="form-input" placeholder="Nama kamu" required autocomplete="name" />
@@ -76,21 +47,47 @@ import Footer from "../components/Footer.astro";
                 <label for="email" class="form-label">Email</label>
                 <input type="email" id="email" name="email" class="form-input" placeholder="email@kamu.com" required autocomplete="email" />
               </div>
-              <div class="form-group">
-                <label for="subject" class="form-label">Topik</label>
-                <input type="text" id="subject" name="subject" class="form-input" placeholder="Networking, kolaborasi, dll." />
+            </div>
+
+            <div class="form-group">
+              <label for="subject" class="form-label">Topik</label>
+              <input type="text" id="subject" name="subject" class="form-input" placeholder="Networking, kolaborasi, dll." />
+            </div>
+
+            <div class="form-group">
+              <label for="message" class="form-label">Pesan</label>
+              <textarea id="message" name="message" class="form-input form-textarea" placeholder="Tulis pesannya..." required rows="4"></textarea>
+            </div>
+
+            <button type="submit" class="btn-main form-submit" id="submitBtn">
+              <span>Kirim Pesan</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </form>
+
+          <!-- Social links -->
+          <div class="social-links reveal d3">
+            <a href="mailto:hello@ahmadmakhasin.dev" class="social-item">
+              <div class="si-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               </div>
-              <div class="form-group">
-                <label for="message" class="form-label">Pesan</label>
-                <textarea id="message" name="message" class="form-input form-textarea" placeholder="Tulis pesannya di sini..." required rows="5"></textarea>
+              <span>hello@ahmadmakhasin.dev</span>
+            </a>
+            <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" class="social-item">
+              <div class="si-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
               </div>
-              <button type="submit" class="btn-main" id="submit-btn">
-                Kirim Pesan
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-            </form>
+              <span>Ahmad Makhasin As Shufi</span>
+            </a>
+            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" class="social-item">
+              <div class="si-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </div>
+              <span>github.com/yourusername</span>
+            </a>
           </div>
         </div>
+
       </div>
     </section>
   </main>
@@ -99,37 +96,425 @@ import Footer from "../components/Footer.astro";
 </Layout>
 
 <script>
-  const form = document.getElementById("contact-form") as HTMLFormElement;
-  const btn  = document.getElementById("submit-btn") as HTMLButtonElement;
-  form?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    if (btn) {
-      btn.textContent = "Terkirim!";
-      btn.style.background = "linear-gradient(135deg,#059669,#10b981)";
-      btn.disabled = true;
-      setTimeout(() => {
-        btn.textContent = "Kirim Pesan";
-        btn.style.background = "";
-        btn.disabled = false;
-        form.reset();
-      }, 3000);
+// ══════════════════════════════════════════════════════════
+//  LANYARD PHYSICS ENGINE
+//  - Tali dari anchor di atas canvas
+//  - Kartu ID tergantung di ujung tali
+//  - Bisa ditarik mouse/touch, mental balik pakai spring
+// ══════════════════════════════════════════════════════════
+
+const canvas  = document.getElementById("lanyardCanvas") as HTMLCanvasElement;
+const ctx     = canvas.getContext("2d")!;
+
+// ── Responsive sizing ──────────────────────────────────
+function resize() {
+  const parent = canvas.parentElement!;
+  canvas.width  = parent.clientWidth;
+  canvas.height = parent.clientHeight;
+}
+resize();
+window.addEventListener("resize", () => { resize(); resetPhysics(); });
+
+// ── Physics constants ──────────────────────────────────
+const GRAVITY    = 0.55;
+const DAMPING    = 0.78;   // redaman (semakin kecil semakin cepat berhenti)
+const STIFFNESS  = 0.28;   // kekerasan tali (spring)
+const SEGMENTS   = 14;     // jumlah segmen tali
+const SEG_LEN    = 22;     // panjang tiap segmen (px)
+
+// Kartu ukuran
+const CARD_W  = () => Math.min(160, canvas.width * 0.38);
+const CARD_H  = () => CARD_W() * 1.58;
+
+// ── State ──────────────────────────────────────────────
+interface Point { x: number; y: number; px: number; py: number; pinned?: boolean; }
+
+let points: Point[] = [];
+let isDragging = false;
+let dragIdx    = -1;
+let prevMouse  = { x: 0, y: 0 };
+let dropDone   = false;   // animasi jatuh sudah selesai?
+
+function anchorX() { return canvas.width  / 2; }
+function anchorY() { return 0; }
+
+function resetPhysics() {
+  points = [];
+  dropDone = false;
+
+  // Titik anchor atas (pinned)
+  for (let i = 0; i <= SEGMENTS; i++) {
+    points.push({
+      x:  anchorX(),
+      y:  anchorY() + i * SEG_LEN * (i === 0 ? 0 : 1),
+      px: anchorX(),
+      py: anchorY() + i * SEG_LEN * (i === 0 ? 0 : 1),
+      pinned: i === 0,
+    });
+  }
+
+  // Animasi drop awal: semua titik dimulai dari atas
+  for (let i = 1; i <= SEGMENTS; i++) {
+    points[i].y  = anchorY() + 2;
+    points[i].py = anchorY() + 2;
+  }
+}
+resetPhysics();
+
+// ── Verlet integration ─────────────────────────────────
+function updatePhysics() {
+  for (let i = 1; i <= SEGMENTS; i++) {
+    if (isDragging && i === SEGMENTS) continue; // skip kartu saat drag
+
+    const p  = points[i];
+    const vx = (p.x - p.px) * DAMPING;
+    const vy = (p.y - p.py) * DAMPING;
+    p.px = p.x;
+    p.py = p.y;
+    p.x += vx;
+    p.y += vy + GRAVITY;
+
+    // Lantai (batas bawah canvas)
+    const floor = canvas.height - CARD_H() / 2 - 10;
+    if (p.y > floor) {
+      p.y  = floor;
+      p.py = floor + vy * 0.3;
     }
-  });
+  }
+
+  // Constraint: jaga jarak antar titik
+  for (let iter = 0; iter < 20; iter++) {
+    // Anchor tetap
+    points[0].x = anchorX();
+    points[0].y = anchorY();
+
+    for (let i = 0; i < SEGMENTS; i++) {
+      const a  = points[i];
+      const b  = points[i + 1];
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const dist = Math.sqrt(dx * dx + dy * dy) || 0.001;
+      const diff = (dist - SEG_LEN) / dist * STIFFNESS;
+      const ox = dx * diff;
+      const oy = dy * diff;
+
+      if (!a.pinned) { a.x += ox; a.y += oy; }
+      if (!b.pinned && !(isDragging && i + 1 === SEGMENTS)) {
+        b.x -= ox;
+        b.y -= oy;
+      }
+    }
+  }
+}
+
+// ── Gambar tali ─────────────────────────────────────────
+function drawRope() {
+  if (points.length < 2) return;
+
+  // Shadow tali
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(points[0].x, points[0].y);
+  for (let i = 1; i <= SEGMENTS; i++) {
+    ctx.lineTo(points[i].x, points[i].y);
+  }
+  ctx.strokeStyle = "rgba(0,0,0,0.12)";
+  ctx.lineWidth   = 5;
+  ctx.lineCap     = "round";
+  ctx.lineJoin    = "round";
+  ctx.filter      = "blur(3px)";
+  ctx.stroke();
+  ctx.restore();
+
+  // Tali utama — gradient
+  const grad = ctx.createLinearGradient(
+    points[0].x, points[0].y,
+    points[SEGMENTS].x, points[SEGMENTS].y
+  );
+  grad.addColorStop(0, "#a78bfa");
+  grad.addColorStop(0.5, "#7c3aed");
+  grad.addColorStop(1, "#22d3ee");
+
+  ctx.beginPath();
+  ctx.moveTo(points[0].x, points[0].y);
+  for (let i = 1; i <= SEGMENTS; i++) {
+    const prev = points[i - 1];
+    const cur  = points[i];
+    ctx.quadraticCurveTo(prev.x, prev.y, (prev.x + cur.x) / 2, (prev.y + cur.y) / 2);
+  }
+  ctx.lineTo(points[SEGMENTS].x, points[SEGMENTS].y);
+  ctx.strokeStyle = grad;
+  ctx.lineWidth   = 3.5;
+  ctx.lineCap     = "round";
+  ctx.lineJoin    = "round";
+  ctx.stroke();
+
+  // Lubang tali di anchor
+  ctx.beginPath();
+  ctx.arc(anchorX(), anchorY(), 7, 0, Math.PI * 2);
+  ctx.fillStyle   = "#7c3aed";
+  ctx.fill();
+  ctx.strokeStyle = "#c4b5fd";
+  ctx.lineWidth   = 2;
+  ctx.stroke();
+}
+
+// ── Gambar kartu ID ──────────────────────────────────────
+function drawCard() {
+  const tip = points[SEGMENTS];
+  const cw  = CARD_W();
+  const ch  = CARD_H();
+  const cx  = tip.x;
+  const cy  = tip.y + ch / 2;
+
+  // Hitung rotasi dari kecepatan tali
+  const prev = points[SEGMENTS - 1];
+  const angle = Math.atan2(tip.x - prev.x, -(tip.y - prev.y)) * 0.35;
+
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(angle);
+
+  // Drop shadow
+  ctx.shadowColor   = "rgba(0,0,0,0.25)";
+  ctx.shadowBlur    = 22;
+  ctx.shadowOffsetY = 8;
+
+  // Body kartu
+  const r = 12;
+  ctx.beginPath();
+  ctx.roundRect(-cw/2, -ch/2, cw, ch, r);
+  ctx.fillStyle = "#1a1630";
+  ctx.fill();
+  ctx.shadowBlur = 0;
+
+  // Top strip warna
+  ctx.beginPath();
+  ctx.roundRect(-cw/2, -ch/2, cw, ch * 0.28, [r, r, 0, 0]);
+  const stripGrad = ctx.createLinearGradient(-cw/2, 0, cw/2, 0);
+  stripGrad.addColorStop(0, "#7c3aed");
+  stripGrad.addColorStop(1, "#22d3ee");
+  ctx.fillStyle = stripGrad;
+  ctx.fill();
+
+  // Logo/text di strip
+  ctx.fillStyle = "rgba(255,255,255,0.9)";
+  ctx.font      = `bold ${cw * 0.12}px Outfit, sans-serif`;
+  ctx.textAlign = "center";
+  ctx.fillText("AMS_", 0, -ch/2 + ch * 0.16);
+
+  // Avatar lingkaran
+  const avatarY = -ch/2 + ch * 0.28 + cw * 0.22;
+  const avatarR = cw * 0.2;
+
+  ctx.beginPath();
+  ctx.arc(0, avatarY, avatarR + 2, 0, Math.PI * 2);
+  ctx.fillStyle = "#0f0d1a";
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.arc(0, avatarY, avatarR, 0, Math.PI * 2);
+  const avatarGrad = ctx.createLinearGradient(-avatarR, avatarY - avatarR, avatarR, avatarY + avatarR);
+  avatarGrad.addColorStop(0, "#a78bfa");
+  avatarGrad.addColorStop(1, "#22d3ee");
+  ctx.fillStyle = avatarGrad;
+  ctx.fill();
+
+  // Inisial di avatar
+  ctx.fillStyle = "#fff";
+  ctx.font      = `800 ${cw * 0.2}px Outfit, sans-serif`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText("AM", 0, avatarY);
+
+  // Nama
+  const nameY = avatarY + avatarR + cw * 0.12;
+  ctx.fillStyle    = "rgba(240,238,255,0.92)";
+  ctx.font         = `700 ${cw * 0.11}px Outfit, sans-serif`;
+  ctx.textBaseline = "alphabetic";
+  ctx.fillText("Ahmad Makhasin", 0, nameY);
+  ctx.fillStyle = "rgba(167,139,250,0.7)";
+  ctx.font      = `500 ${cw * 0.09}px Outfit, sans-serif`;
+  ctx.fillText("As Shufi", 0, nameY + cw * 0.14);
+
+  // Role
+  ctx.fillStyle = "rgba(34,211,238,0.75)";
+  ctx.font      = `600 ${cw * 0.085}px Outfit, sans-serif`;
+  ctx.fillText("Network Engineer", 0, nameY + cw * 0.3);
+
+  // Garis separator
+  const lineY = nameY + cw * 0.42;
+  ctx.beginPath();
+  ctx.moveTo(-cw/2 + 14, lineY);
+  ctx.lineTo( cw/2 - 14, lineY);
+  ctx.strokeStyle = "rgba(255,255,255,0.08)";
+  ctx.lineWidth   = 1;
+  ctx.stroke();
+
+  // Barcode placeholder
+  const bcY = lineY + 10;
+  const bcW = cw * 0.7;
+  const bcH = ch * 0.09;
+  const nBars = 20;
+  const barW  = bcW / (nBars * 1.6);
+  for (let i = 0; i < nBars; i++) {
+    const bx = -bcW/2 + i * (bcW / nBars);
+    ctx.fillStyle = i % 3 === 0
+      ? "rgba(167,139,250,0.6)"
+      : "rgba(255,255,255,0.15)";
+    ctx.fillRect(bx, bcY, barW, bcH);
+  }
+
+  // Border kartu
+  ctx.beginPath();
+  ctx.roundRect(-cw/2, -ch/2, cw, ch, r);
+  ctx.strokeStyle = "rgba(167,139,250,0.25)";
+  ctx.lineWidth   = 1.5;
+  ctx.stroke();
+
+  ctx.restore();
+}
+
+// ── Gambar klip tali ke kartu ────────────────────────────
+function drawClip() {
+  const tip = points[SEGMENTS];
+  const cw  = CARD_W();
+
+  ctx.save();
+  ctx.translate(tip.x, tip.y);
+
+  ctx.beginPath();
+  ctx.rect(-cw * 0.06, -6, cw * 0.12, 14);
+  ctx.fillStyle   = "#c4b5fd";
+  ctx.fill();
+  ctx.strokeStyle = "#7c3aed";
+  ctx.lineWidth   = 1.5;
+  ctx.stroke();
+
+  ctx.restore();
+}
+
+// ── Main loop ────────────────────────────────────────────
+function loop() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  updatePhysics();
+  drawRope();
+  drawClip();
+  drawCard();
+  requestAnimationFrame(loop);
+}
+loop();
+
+// ── Drag (mouse) ──────────────────────────────────────────
+function getPos(e: MouseEvent | Touch): { x: number; y: number } {
+  const r = canvas.getBoundingClientRect();
+  return {
+    x: ("clientX" in e ? e.clientX : (e as Touch).clientX) - r.left,
+    y: ("clientY" in e ? e.clientY : (e as Touch).clientY) - r.top,
+  };
+}
+
+function nearCard(pos: { x: number; y: number }) {
+  const tip = points[SEGMENTS];
+  const cw  = CARD_W();
+  const ch  = CARD_H();
+  const cx  = tip.x;
+  const cy  = tip.y + ch / 2;
+  return (
+    pos.x > cx - cw / 2 - 20 && pos.x < cx + cw / 2 + 20 &&
+    pos.y > tip.y - 10       && pos.y < cy + ch / 2 + 10
+  );
+}
+
+canvas.addEventListener("mousedown", (e) => {
+  const pos = getPos(e);
+  if (nearCard(pos)) {
+    isDragging = true;
+    dragIdx    = SEGMENTS;
+    prevMouse  = pos;
+    canvas.style.cursor = "grabbing";
+  }
+});
+
+window.addEventListener("mousemove", (e) => {
+  const pos = getPos(e);
+  if (isDragging) {
+    const vx = (pos.x - prevMouse.x) * 1.1;
+    const vy = (pos.y - prevMouse.y) * 1.1;
+    const p  = points[SEGMENTS];
+    p.x  = pos.x;
+    p.y  = pos.y - CARD_H() / 2 + 10;
+    p.px = p.x - vx;
+    p.py = p.y - vy;
+    prevMouse = pos;
+  } else {
+    canvas.style.cursor = nearCard(pos) ? "grab" : "default";
+  }
+});
+
+window.addEventListener("mouseup", () => {
+  isDragging = false;
+  canvas.style.cursor = "default";
+});
+
+// ── Drag (touch) ──────────────────────────────────────────
+canvas.addEventListener("touchstart", (e) => {
+  const pos = getPos(e.touches[0]);
+  if (nearCard(pos)) {
+    isDragging = true;
+    dragIdx    = SEGMENTS;
+    prevMouse  = pos;
+    e.preventDefault();
+  }
+}, { passive: false });
+
+window.addEventListener("touchmove", (e) => {
+  if (!isDragging) return;
+  const pos = getPos(e.touches[0]);
+  const vx  = (pos.x - prevMouse.x) * 1.1;
+  const vy  = (pos.y - prevMouse.y) * 1.1;
+  const p   = points[SEGMENTS];
+  p.x  = pos.x;
+  p.y  = pos.y - CARD_H() / 2 + 10;
+  p.px = p.x - vx;
+  p.py = p.y - vy;
+  prevMouse = pos;
+  e.preventDefault();
+}, { passive: false });
+
+window.addEventListener("touchend", () => { isDragging = false; });
+
+// ── Form submit ───────────────────────────────────────────
+const form      = document.getElementById("contactForm") as HTMLFormElement;
+const submitBtn = document.getElementById("submitBtn") as HTMLButtonElement;
+form?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const span = submitBtn.querySelector("span");
+  if (span) span.textContent = "Terkirim!";
+  submitBtn.style.background = "linear-gradient(135deg,#059669,#10b981)";
+  submitBtn.disabled = true;
+  setTimeout(() => {
+    if (span) span.textContent = "Kirim Pesan";
+    submitBtn.style.background = "";
+    submitBtn.disabled = false;
+    form.reset();
+  }, 3000);
+});
 </script>
 
 <style>
+  /* PAGE HEADER */
   .page-header {
-    background: linear-gradient(160deg, #2d1b69, #1a1035, #0f2744);
-    padding: 140px 24px 72px;
+    background: linear-gradient(160deg, #2d1b69 0%, #1a1035 45%, #0f2744 100%);
+    padding: 120px 20px 56px;
     position: relative;
     overflow: hidden;
   }
   .page-header-mesh {
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background:
-      radial-gradient(ellipse 70% 60% at 80% 30%, rgba(139,92,246,0.28) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 70% at 10% 80%, rgba(34,211,238,0.14) 0%, transparent 55%);
+      radial-gradient(ellipse 70% 60% at 75% 25%, rgba(139,92,246,0.3) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 70% at 15% 80%, rgba(34,211,238,0.13) 0%, transparent 55%);
     pointer-events: none;
   }
   .page-header-inner {
@@ -137,101 +522,186 @@ import Footer from "../components/Footer.astro";
     max-width: 1100px; margin: 0 auto;
   }
   @media (min-width: 768px) {
-    .page-header { padding: 160px 48px 80px; }
+    .page-header { padding: 150px 48px 72px; }
   }
 
-  .page-h1 { font-size: clamp(40px,8vw,72px); color: #f0eeff; }
-  .page-h1 em { font-style:normal; color: #22d3ee; }
+  .overline-label {
+    font-size: 10.5px; font-weight: 600;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: #a78bfa; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .overline-label::before {
+    content: ''; display: block;
+    width: 22px; height: 1.5px; background: #a78bfa;
+  }
+  .page-h1 { font-size: clamp(36px, 8vw, 64px); color: #f0eeff; }
+  .page-h1 em { font-style: normal; color: #22d3ee; }
+  .page-sub { font-size: 14px; color: rgba(240,238,255,0.48); margin-top: 12px; max-width: 380px; }
 
-  .contact-grid {
+  /* MAIN SECTION */
+  .contact-section {
+    background: var(--bg);
+    transition: background 0.3s;
+    padding: 0 0 80px;
+  }
+
+  .contact-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    /* Mobile: lanyard di atas, form di bawah */
     display: flex;
     flex-direction: column;
-    gap: 48px;
+    gap: 0;
   }
+
   @media (min-width: 768px) {
-    .contact-grid { flex-direction: row; gap: 72px; align-items: flex-start; }
-    .contact-info { flex: 0 0 320px; }
-    .contact-form-wrap { flex: 1; }
+    .contact-inner {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 40px;
+      padding: 0 48px;
+    }
   }
 
-  .contact-desc {
-    font-size: 14.5px;
-    line-height: 1.8;
-    color: #6b6080;
-    margin-bottom: 32px;
-    max-width: 300px;
-  }
-
-  .contact-items { display: flex; flex-direction: column; gap: 4px; }
-
-  .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px 0;
-    border-bottom: 1px solid rgba(124,58,237,0.1);
-    text-decoration: none;
-    transition: padding-left 0.22s;
-    cursor: pointer;
-  }
-  .contact-item:last-child { border-bottom: none; }
-  .contact-item:hover { padding-left: 6px; }
-
-  .ci-icon {
-    width: 40px; height: 40px;
-    background: #fff;
-    border: 1.5px solid rgba(124,58,237,0.16);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    color: #a89cc0;
+  /* ── LANYARD SIDE ── */
+  .lanyard-side {
+    width: 100%;
+    /* Mobile: full width, tinggi terbatas */
+    height: 360px;
+    position: relative;
     flex-shrink: 0;
-    transition: all 0.22s;
-  }
-  .contact-item:hover .ci-icon {
-    background: #7c3aed;
-    border-color: #7c3aed;
-    color: #fff;
   }
 
-  .ci-label {
-    font-size: 10px; font-weight: 700;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    color: #a89cc0; margin-bottom: 3px;
+  @media (min-width: 768px) {
+    .lanyard-side {
+      width: 340px;
+      height: 520px;
+      position: sticky;
+      top: 80px;
+    }
   }
-  .ci-val { font-size: 14px; font-weight: 500; color: #4a3f72; }
+
+  .lanyard-label {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--text-4);
+    white-space: nowrap;
+    z-index: 1;
+  }
+
+  #lanyardCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    touch-action: none; /* penting untuk drag di mobile */
+  }
+
+  /* ── FORM SIDE ── */
+  .form-side {
+    flex: 1;
+    padding: 40px 0 0;
+  }
+
+  @media (min-width: 768px) {
+    .form-side { padding: 48px 0 0; }
+  }
+
+  .form-header { margin-bottom: 28px; }
+
+  .form-title {
+    font-size: clamp(26px, 5vw, 38px);
+    color: var(--text-1);
+    margin-bottom: 8px;
+    font-weight: 800;
+  }
+
+  .form-desc { font-size: 14px; color: var(--text-3); }
 
   /* Form */
-  form { display: flex; flex-direction: column; gap: 18px; }
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 480px) {
+    .form-row { grid-template-columns: 1fr 1fr; }
+  }
 
   .form-group { display: flex; flex-direction: column; gap: 7px; }
 
   .form-label {
-    font-size: 10.5px; font-weight: 700;
+    font-size: 11px; font-weight: 700;
     letter-spacing: 0.14em; text-transform: uppercase;
-    color: #a89cc0;
+    color: var(--text-4);
   }
 
   .form-input {
-    font-family: "Inter", sans-serif;
+    font-family: "Outfit", sans-serif;
     font-size: 14px; font-weight: 400;
-    color: #1a1035;
-    background: #fff;
-    border: 1.5px solid rgba(124,58,237,0.14);
+    color: var(--text-1);
+    background: var(--bg-card);
+    border: 1.5px solid var(--border);
     border-radius: 10px;
-    padding: 12px 16px;
+    padding: 12px 15px;
     outline: none;
     width: 100%;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    appearance: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.3s;
     -webkit-appearance: none;
   }
-  .form-input::placeholder { color: #c4b9d8; }
+  .form-input::placeholder { color: var(--text-4); opacity: 0.7; }
   .form-input:focus {
-    border-color: rgba(124,58,237,0.45);
+    border-color: rgba(124,58,237,0.5);
     box-shadow: 0 0 0 3px rgba(124,58,237,0.1);
   }
+  .form-textarea { resize: vertical; min-height: 110px; }
 
-  .form-textarea { resize: vertical; min-height: 130px; }
+  .form-submit { align-self: flex-start; }
 
-  #submit-btn { align-self: flex-start; margin-top: 4px; }
+  /* Social links */
+  .social-links { display: flex; flex-direction: column; gap: 4px; }
+
+  .social-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    transition: padding-left 0.2s;
+    color: var(--text-2);
+    font-size: 13.5px;
+    font-weight: 500;
+  }
+  .social-item:last-child { border-bottom: none; }
+  .social-item:hover { padding-left: 6px; color: var(--violet); }
+
+  .si-icon {
+    width: 36px; height: 36px;
+    background: var(--bg-card);
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-3);
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+  .social-item:hover .si-icon {
+    background: var(--violet);
+    border-color: var(--violet);
+    color: #fff;
+  }
 </style>
