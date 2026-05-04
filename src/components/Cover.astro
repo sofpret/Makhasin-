@@ -1,500 +1,440 @@
 ---
-// ── CONFIG ─────────────────────────────
-// Ganti path foto di sini kalau sudah ada:
-// const photoSrc = "/images/anjai.jpg";
-// Kalau belum ada foto, biarkan kosong string
-const photoSrc = "images/anjai.jpg";
-
-const name    = "Ahmad Makhasin As Shufi";
-const role    = "Makhasin As'Shufi";
-const sub     = "Manajemen Pendidikan × Infrastructure";
-const bio     = "Dibentuk dari tekanan, bukan pujian. Bergerak dalam diam, hasil yang berbicara. Nggak kejar validasi, gue bangun standar.";
-// ───────────────────────────────────────
+const photoSrc = "/images/anjai.jpg"; // ganti path foto kamu
+const marqueeText = "NETWORK ENGINEER · CISCO · MIKROTIK · LINUX · TCP/IP · FIREWALL · VLAN · OSPF · INFRASTRUCTURE · MANAJEMEN PENDIDIKAN ·";
 ---
 
-<section class="cover" id="cover" aria-label="Halaman utama">
-  <!-- Mesh gradient background -->
-  <div class="cover-mesh" aria-hidden="true"></div>
+<section class="cover" id="cover">
 
-  <!-- Floating particles -->
-  <div class="particles" id="particles" aria-hidden="true"></div>
-
-  <!-- Foto / placeholder dengan 3D tilt -->
-  <div class="cover-photo-wrap" aria-hidden="true">
-    <div class="tilt-outer" id="tiltOuter">
-      <div class="tilt-inner" id="tiltInner">
-        {photoSrc ? (
-          <img
-            src={photoSrc}
-            alt={name}
-            class="tilt-img"
-            draggable="false"
-          />
-        ) : (
-          <div class="photo-placeholder">
-            <div class="photo-initials">AM</div>
-            <p class="photo-hint">Taruh foto kamu di sini</p>
-          </div>
-        )}
-        <!-- Shimmer overlay -->
-        <div class="tilt-shimmer" id="tiltShimmer"></div>
+  <!-- LAYER 1: Marquee di belakang foto -->
+  <div class="marquee-layer" aria-hidden="true">
+    <div class="mq-row mq-top">
+      <div class="mq-track mq-fwd">
+        <span>{marqueeText}</span><span>{marqueeText}</span><span>{marqueeText}</span>
       </div>
     </div>
-    <!-- Glow di bawah foto -->
-    <div class="photo-glow" aria-hidden="true"></div>
-  </div>
-
-  <!-- Gradient overlay bawah -->
-  <div class="cover-overlay" aria-hidden="true"></div>
-
-  <!-- Konten teks -->
-  <div class="cover-content">
-    <div class="cover-eyebrow">{name}</div>
-
-    <h1 class="cover-h1">
-      {role.split(" ").slice(0, -1).join(" ")}<br />
-      <em>{role.split(" ").slice(-1)[0]}.</em>
-    </h1>
-
-    <p class="cover-sub">{sub}</p>
-
-    <p class="cover-bio">{bio}</p>
-
-    <div class="cover-btns">
-      <a href="/projects" class="btn-main">Lihat Proyek</a>
-      <a href="/cv.pdf" class="btn-ghost-dark">Lihat CV</a>
+    <div class="mq-row mq-mid">
+      <div class="mq-track mq-rev">
+        <span>{marqueeText}</span><span>{marqueeText}</span><span>{marqueeText}</span>
+      </div>
     </div>
-
-    <div class="cover-stats" role="list" aria-label="Statistik singkat">
-      <div class="cs" role="listitem">
-        <span class="cs-num">03<em>+</em></span>
-        <span class="cs-lbl">Tahun belajar</span>
-      </div>
-      <div class="cs-sep" aria-hidden="true"></div>
-      <div class="cs" role="listitem">
-        <span class="cs-num">12<em>+</em></span>
-        <span class="cs-lbl">Proyek selesai</span>
-      </div>
-      <div class="cs-sep" aria-hidden="true"></div>
-      <div class="cs" role="listitem">
-        <span class="cs-num">∞</span>
-        <span class="cs-lbl">Curiosity</span>
+    <div class="mq-row mq-bot">
+      <div class="mq-track mq-fwd" style="animation-duration:24s">
+        <span>{marqueeText}</span><span>{marqueeText}</span><span>{marqueeText}</span>
       </div>
     </div>
   </div>
 
-  <!-- Scroll indicator -->
-  <div class="scroll-indicator" aria-hidden="true">
-    <div class="scroll-line">
-      <div class="scroll-line-fill"></div>
-    </div>
-    <span class="scroll-txt">scroll</span>
+  <!-- LAYER 2: Foto full background -->
+  <div class="photo-bg">
+    {photoSrc ? (
+      <img src={photoSrc} alt="Ahmad Makhasin As Shufi" class="photo-img" draggable="false" />
+    ) : (
+      <div class="photo-ph">
+        <span class="ph-init">AM</span>
+        <p class="ph-txt">Taruh foto kamu di /public/images/foto.jpg</p>
+      </div>
+    )}
+    <div class="photo-overlay"></div>
   </div>
+
+
+  <!-- LAYER 4: Role kanan (desktop only) -->
+  <div class="cover-role" aria-hidden="true">
+    <span>Network Engineer,</span>
+    <span>Infrastructure &amp; Systems</span>
+  </div>
+
+  <!-- LAYER 5: Nama gede bawah -->
+  <div class="name-block">
+    <p class="name-eyebrow">Ahmad Makhasin As Shufi</p>
+    <div class="name-line">
+      <span class="nw nw-1" id="w1">AHMAD</span>
+    </div>
+    <div class="name-line">
+      <span class="nw nw-2" id="w2">MAKHASIN</span>
+    </div>
+  </div>
+
+  <!-- Stats strip -->
+  <div class="stats-strip">
+    <div class="stat-item">
+      <span class="stat-num">03<sup>+</sup></span>
+      <span class="stat-lbl">Tahun belajar</span>
+    </div>
+    <div class="stat-sep" aria-hidden="true"></div>
+    <div class="stat-item">
+      <span class="stat-num">12<sup>+</sup></span>
+      <span class="stat-lbl">Proyek selesai</span>
+    </div>
+    <div class="stat-sep" aria-hidden="true"></div>
+    <div class="stat-item">
+      <span class="stat-num">∞</span>
+      <span class="stat-lbl">Curiosity</span>
+    </div>
+    <div class="stat-cta">
+      <a href="/projects" class="cta-btn">
+        Lihat Proyek
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="/public/cv.pdf" download class="cta-ghost">CV</a>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="scroll-hint" aria-hidden="true">
+    <div class="sh-line"><div class="sh-fill"></div></div>
+    <span class="sh-txt">scroll</span>
+  </div>
+
 </section>
 
 <script>
-  // ── 3D TILT ──────────────────────────
-  const outer  = document.getElementById("tiltOuter");
-  const inner  = document.getElementById("tiltInner");
-  const shimmer = document.getElementById("tiltShimmer");
+  // Animasi masuk nama
+  ["w1","w2"].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.opacity = "0";
+    el.style.transform = "translateY(48px)";
+    el.style.transition = `opacity 1s cubic-bezier(0.16,1,0.3,1) ${0.15 + i*0.18}s, transform 1s cubic-bezier(0.16,1,0.3,1) ${0.15 + i*0.18}s`;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      el.style.opacity = "1";
+      el.style.transform = "translateY(0)";
+    }));
+  });
 
-  if (outer && inner) {
-    const TILT  = 18;
-    const SCALE = 1.04;
-
-    outer.addEventListener("mousemove", (e) => {
-      const r = outer.getBoundingClientRect();
-      const x = (e.clientX - r.left)  / r.width  - 0.5;
-      const y = (e.clientY - r.top)   / r.height - 0.5;
-      inner.style.transform = `rotateY(${x * TILT}deg) rotateX(${-y * TILT}deg) scale(${SCALE})`;
-      inner.style.transition = "transform 0.08s ease-out";
-      if (shimmer) {
-        shimmer.style.background = `radial-gradient(circle at ${(x + 0.5) * 100}% ${(y + 0.5) * 100}%, rgba(255,255,255,0.12) 0%, transparent 60%)`;
-      }
-    });
-
-    outer.addEventListener("mouseleave", () => {
-      inner.style.transform = "rotateY(0deg) rotateX(0deg) scale(1)";
-      inner.style.transition = "transform 0.55s cubic-bezier(0.23, 1, 0.32, 1)";
-      if (shimmer) shimmer.style.background = "none";
-    });
-
-    // Touch tilt (mobile)
-    outer.addEventListener("touchmove", (e) => {
-      const t = e.touches[0];
-      const r = outer.getBoundingClientRect();
-      const x = (t.clientX - r.left)  / r.width  - 0.5;
-      const y = (t.clientY - r.top)   / r.height - 0.5;
-      inner.style.transform = `rotateY(${x * 14}deg) rotateX(${-y * 14}deg) scale(1.03)`;
-      inner.style.transition = "transform 0.08s ease-out";
-    }, { passive: true });
-
-    outer.addEventListener("touchend", () => {
-      inner.style.transform = "rotateY(0deg) rotateX(0deg) scale(1)";
-      inner.style.transition = "transform 0.55s cubic-bezier(0.23, 1, 0.32, 1)";
-    });
-  }
-
-  // ── PARTICLES ────────────────────────
-  const container = document.getElementById("particles");
-  if (container) {
-    const dots = [
-      { size: 8,  color: "#c4b5fd", x: 8,  y: 15, dur: 7,  del: 0   },
-      { size: 5,  color: "#22d3ee", x: 85, y: 20, dur: 9,  del: 1.5 },
-      { size: 10, color: "#a78bfa", x: 15, y: 70, dur: 6,  del: 2   },
-      { size: 6,  color: "#67e8f9", x: 90, y: 65, dur: 11, del: 0.8 },
-      { size: 7,  color: "#c4b5fd", x: 50, y: 88, dur: 8,  del: 3   },
-      { size: 5,  color: "#22d3ee", x: 72, y: 10, dur: 10, del: 1.2 },
-      { size: 9,  color: "#a78bfa", x: 30, y: 40, dur: 7.5,del: 4   },
-      { size: 4,  color: "#67e8f9", x: 62, y: 5,  dur: 12, del: 2.5 },
-    ];
-    dots.forEach((d) => {
-      const el = document.createElement("div");
-      el.className = "particle";
-      el.style.cssText = `
-        width:${d.size}px;height:${d.size}px;
-        background:${d.color};
-        left:${d.x}%;top:${d.y}%;
-        --dur:${d.dur}s;--del:${d.del}s;
-      `;
-      container.appendChild(el);
-    });
-  }
+  // Parallax scroll ringan
+  const photoImg  = document.querySelector(".photo-img")  as HTMLElement;
+  const nameBlock = document.querySelector(".name-block") as HTMLElement;
+  window.addEventListener("scroll", () => {
+    const y = window.scrollY;
+    if (photoImg)  photoImg.style.transform  = `translateY(${y * 0.22}px) scale(1.02)`;
+    if (nameBlock) nameBlock.style.transform = `translateY(${y * 0.12}px)`;
+  }, { passive: true });
 </script>
 
 <style>
-  /* COVER */
+  /* ── BASE ── */
   .cover {
     position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: flex-end;
-    overflow: hidden;
-    background: linear-gradient(160deg, #2d1b69 0%, #1a1035 45%, #0f2744 100%);
-  }
-
-  /* Mesh */
-  .cover-mesh {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 65% 15%, rgba(139,92,246,0.35) 0%, transparent 60%),
-      radial-gradient(ellipse 55% 75% at 15% 80%, rgba(34,211,238,0.16) 0%, transparent 55%),
-      radial-gradient(ellipse 45% 45% at 92% 75%, rgba(167,139,250,0.2) 0%, transparent 50%);
-    pointer-events: none;
-  }
-
-  /* Particles */
-  .particles {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-  }
-  :global(.particle) {
-    position: absolute;
-    border-radius: 50%;
-    animation: particleFloat var(--dur, 7s) ease-in-out infinite var(--del, 0s);
-    will-change: transform;
-  }
-  @keyframes particleFloat {
-    0%, 100% { transform: translateY(0) scale(1); opacity: 0.55; }
-    50%       { transform: translateY(-24px) scale(1.15); opacity: 0.9; }
-  }
-
-  /* ── PHOTO ── */
-  .cover-photo-wrap {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-    z-index: 2;
-  }
-
-  /* Di mobile: foto di tengah-atas, blur di bawah krn ada teks overlay */
-  @media (max-width: 767px) {
-    .cover-photo-wrap {
-      align-items: flex-start;
-      padding-top: 90px;
-      opacity: 0.35;
-    }
-  }
-
-  .tilt-outer {
-    perspective: 900px;
-    pointer-events: all;
-    cursor: pointer;
-  }
-
-  .tilt-inner {
-    width: 260px;
-    height: 340px;
-    border-radius: 24px;
-    position: relative;
-    background: linear-gradient(145deg, rgba(45, 27, 105, 0.8), rgba(26, 16, 53, 0.9));
-    border: 1px solid rgba(167, 139, 250, 0.25);
-    overflow: hidden;
-    transform-style: preserve-3d;
-    will-change: transform;
-  }
-
-  @media (min-width: 768px) {
-    .tilt-inner { width: 300px; height: 390px; }
-  }
-
-  .tilt-img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-    border-radius: 24px;
+    height: 100dvh;
+    min-height: 580px;
+    overflow: hidden;
+    background: #0c0a14;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 4; /* di atas foto dan overlay */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 5% 0;
     pointer-events: none;
+    overflow: hidden;
+  }
+
+  .mq-row { width: 100%; overflow: hidden; }
+
+  .mq-track {
+    display: flex;
+    white-space: nowrap;
+    width: max-content;
+  }
+
+  .mq-track span {
+    font-family: "Outfit", sans-serif;
+    font-size: clamp(20px, 4vw, 50px);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.32);
+    padding-right: 0.5em;
     user-select: none;
   }
 
-  .photo-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
+  .mq-mid .mq-track span {
+    -webkit-text-stroke: 1.5px rgba(167, 139, 250, 0.45);
   }
 
-  .photo-initials {
-    font-family: "Syne", sans-serif;
-    font-size: 72px;
-    font-weight: 800;
-    color: rgba(167, 139, 250, 0.25);
-    letter-spacing: -0.04em;
-    line-height: 1;
-  }
+  .mq-fwd { animation: mqL 18s linear infinite; }
+  .mq-rev { animation: mqR 21s linear infinite; }
 
-  .photo-hint {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(167, 139, 250, 0.35);
-    line-height: 1;
-    text-align: center;
-    padding: 0 20px;
-  }
+  @keyframes mqL { from { transform: translateX(0); }         to { transform: translateX(-33.333%); } }
+  @keyframes mqR { from { transform: translateX(-33.333%); } to { transform: translateX(0); } }
 
-  .tilt-shimmer {
+  /* ── FOTO ── */
+  .photo-bg {
     position: absolute;
     inset: 0;
-    border-radius: 24px;
-    pointer-events: none;
     z-index: 2;
-    transition: background 0.1s;
   }
 
-  .photo-glow {
-    position: absolute;
-    bottom: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 220px;
-    height: 80px;
-    background: radial-gradient(ellipse, rgba(139, 92, 246, 0.5) 0%, transparent 70%);
-    filter: blur(16px);
-    pointer-events: none;
-    animation: glowPulse 3s ease-in-out infinite;
-  }
-
-  @keyframes glowPulse {
-    0%, 100% { opacity: 0.6; }
-    50%       { opacity: 1; }
-  }
-
-  /* ── OVERLAY ── */
-  .cover-overlay {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 60%;
-    background: linear-gradient(
-      to top,
-      rgba(13, 6, 26, 0.97) 0%,
-      rgba(13, 6, 26, 0.75) 40%,
-      transparent 100%
-    );
-    pointer-events: none;
-    z-index: 3;
-  }
-
-  /* Di mobile overlay lebih tinggi supaya teks terbaca */
-  @media (max-width: 767px) {
-    .cover-overlay { height: 75%; }
-  }
-
-  /* ── CONTENT ── */
-  .cover-content {
-    position: relative;
-    z-index: 10;
-    padding: 0 24px 44px;
+  .photo-img {
     width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 12%; /* Mobile: wajah di atas */
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    will-change: transform;
+    transition: transform 0.08s linear;
   }
 
   @media (min-width: 768px) {
-    .cover-content { padding: 0 48px 56px; }
+    .photo-img { object-position: center top; }
   }
 
-  .cover-eyebrow {
-    font-family: "Inter", sans-serif;
-    font-size: 10.5px;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: #a78bfa;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  /* Placeholder */
+  .photo-ph {
+    width: 100%; height: 100%;
+    background: linear-gradient(160deg, #1e1440, #0f2744);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 16px;
   }
-  .cover-eyebrow::before {
-    content: '';
-    display: block;
-    width: 22px;
-    height: 1.5px;
-    background: #a78bfa;
-    flex-shrink: 0;
-  }
-
-  .cover-h1 {
-    font-size: clamp(48px, 11vw, 96px);
-    color: #f0eeff;
-    margin-bottom: 8px;
-  }
-  .cover-h1 em {
-    font-style: normal;
-    color: #22d3ee;
-  }
-
-  .cover-sub {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(240, 238, 255, 0.28);
-    margin-bottom: 18px;
+  .ph-init {
+    font-family: "Outfit", sans-serif;
+    font-size: clamp(100px, 30vw, 220px);
+    font-weight: 900;
+    color: rgba(167,139,250,0.12);
     line-height: 1;
   }
-
-  .cover-bio {
-    font-size: 14.5px;
-    line-height: 1.8;
-    color: rgba(240, 238, 255, 0.58);
-    max-width: 440px;
-    margin-bottom: 28px;
-    font-weight: 400;
+  .ph-txt {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(167,139,250,0.28);
+    text-align: center; padding: 0 24px;
   }
 
-  .cover-btns {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 32px;
-  }
-
-  /* Stats */
-  .cover-stats {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-
-  @media (min-width: 480px) {
-    .cover-stats { gap: 0; flex-wrap: nowrap; }
-  }
-
-  .cs { flex-shrink: 0; }
-
-  @media (min-width: 480px) {
-    .cs { padding: 0 28px; }
-    .cs:first-child { padding-left: 0; }
-    .cs:last-child  { padding-right: 0; }
-  }
-
-  .cs-num {
-    display: block;
-    font-family: "Syne", sans-serif;
-    font-size: 28px;
-    font-weight: 800;
-    color: #f0eeff;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .cs-num em { color: #a78bfa; font-style: normal; font-size: 18px; }
-
-  .cs-lbl {
-    display: block;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(240, 238, 255, 0.3);
-  }
-
-  .cs-sep {
-    width: 1px;
-    height: 36px;
-    background: rgba(255, 255, 255, 0.08);
-    flex-shrink: 0;
-    display: none;
-  }
-  @media (min-width: 480px) { .cs-sep { display: block; } }
-
-  /* ── SCROLL INDICATOR ── */
-  .scroll-indicator {
+  /* Overlay gradients di atas foto */
+  .photo-overlay {
     position: absolute;
-    bottom: 32px;
-    right: 28px;
+    inset: 0;
+    background:
+      linear-gradient(to top,
+        rgba(6, 4, 14, 0.97) 0%,
+        rgba(6, 4, 14, 0.72) 30%,
+        rgba(6, 4, 14, 0.2)  58%,
+        transparent 76%
+      ),
+      linear-gradient(to bottom,
+        rgba(6, 4, 14, 0.6) 0%,
+        transparent 20%
+      ),
+      linear-gradient(to right,
+        rgba(6, 4, 14, 0.4) 0%,
+        transparent 55%
+      );
+    pointer-events: none;
+  }
+
+  /* ── NAVBAR ── */
+  .cover-nav {
+    position: absolute;
+    top: 0; left: 0; right: 0;
     z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
+    padding: 18px 18px;
   }
 
-  .scroll-line {
-    width: 1px;
-    height: 44px;
-    background: rgba(255, 255, 255, 0.12);
-    position: relative;
-    overflow: hidden;
+  @media (min-width: 768px) {
+    .cover-nav { padding: 24px 40px; }
   }
 
-  .scroll-line-fill {
+  .nav-left { display: flex; gap: 5px; flex-wrap: wrap; }
+
+  .nav-pill {
+    font-family: "Outfit", sans-serif;
+    font-size: 11.5px; font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    padding: 6px 14px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 100px;
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.04);
+    transition: all 0.2s;
+  }
+  .nav-pill:hover { color:#fff; background:rgba(255,255,255,0.12); border-color:rgba(255,255,255,0.38); }
+  .nav-pill.active { color:rgba(255,255,255,0.9); background:rgba(124,58,237,0.28); border-color:rgba(167,139,250,0.45); }
+
+  /* ── ROLE KANAN (desktop) ── */
+  .cover-role {
+    display: none;
     position: absolute;
-    top: -44px;
-    left: 0;
-    width: 100%;
-    height: 44px;
-    background: linear-gradient(to bottom, transparent, #a78bfa);
-    animation: scrollFill 2s ease-in-out infinite;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 6;
+    text-align: right;
+    line-height: 1.6;
+  }
+  @media (min-width: 900px) { .cover-role { display: block; } }
+
+  .cover-role span {
+    display: block;
+    font-family: "Outfit", sans-serif;
+    font-size: 15px; font-weight: 500;
+    color: rgba(255,255,255,0.68);
+    letter-spacing: 0.02em;
   }
 
-  @keyframes scrollFill {
-    0%   { top: -44px; opacity: 0; }
-    20%  { opacity: 1; }
-    100% { top: 44px; opacity: 0; }
+  /* ── NAMA GEDE ── */
+  .name-block {
+    position: relative;
+    z-index: 6;
+    padding: 0 16px 0;
+    will-change: transform;
+  }
+  @media (min-width: 768px) { .name-block { padding: 0 40px 0; } }
+
+  .name-eyebrow {
+    font-family: "Outfit", sans-serif;
+    font-size: 10.5px; font-weight: 600;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    color: rgba(167,139,250,0.85);
+    margin-bottom: 6px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .name-eyebrow::before {
+    content:''; display:inline-block;
+    width:20px; height:1.5px; background:#a78bfa; flex-shrink:0;
   }
 
-  .scroll-txt {
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
+  .name-line {
+    line-height: 0.88;
+    overflow: hidden;
+    display: block;
+  }
+
+  .nw {
+    display: block;
+    font-family: "Outfit", sans-serif;
+    font-weight: 900;
+    letter-spacing: -0.03em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.22);
-    writing-mode: vertical-rl;
+    color: rgba(238,234,255,0.95);
+    will-change: opacity, transform;
+    line-height: 0.92;
+  }
+
+  /* Baris 1 lebih besar */
+  .nw-1 { font-size: clamp(62px, 18.5vw, 168px); }
+
+  /* Baris 2 sedikit lebih kecil + transparan sedikit — efek "di balik foto" */
+  .nw-2 {
+    font-size: clamp(46px, 14vw, 130px);
+    color: rgba(238,234,255,0.82);
+  }
+
+  /* ── STATS STRIP ── */
+  .stats-strip {
+    position: relative;
+    z-index: 6;
+    display: flex;
+    align-items: center;
+    padding: 14px 16px 22px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    margin-top: 12px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  @media (min-width: 480px) {
+    .stats-strip { flex-wrap:nowrap; gap:0; padding:16px 40px 28px; }
+  }
+
+  .stat-item {
+    display: flex; flex-direction: column; gap: 2px;
+    flex-shrink: 0;
+  }
+  @media (min-width: 480px) {
+    .stat-item { padding: 0 20px; }
+    .stat-item:first-child { padding-left: 0; }
+  }
+
+  .stat-num {
+    font-family: "Outfit", sans-serif;
+    font-size: clamp(20px, 4vw, 28px);
+    font-weight: 900; color: #fff; line-height: 1;
+  }
+  .stat-num sup { font-size: 0.55em; color: #a78bfa; vertical-align: super; }
+
+  .stat-lbl {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(255,255,255,0.28);
+  }
+
+  .stat-sep {
+    width: 1px; height: 30px;
+    background: rgba(255,255,255,0.09);
+    flex-shrink: 0; display: none;
+  }
+  @media (min-width: 480px) { .stat-sep { display: block; } }
+
+  .stat-cta {
+    display: flex; gap: 8px;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: "Outfit", sans-serif;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+    color: #0a0614;
+    background: linear-gradient(135deg, #a78bfa, #22d3ee);
+    border-radius: 100px; padding: 10px 20px;
+    text-decoration: none; white-space: nowrap;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .cta-btn:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(167,139,250,0.4); }
+
+  .cta-ghost {
+    display: inline-flex; align-items: center;
+    font-family: "Outfit", sans-serif;
+    font-size: 12px; font-weight: 600;
+    color: rgba(255,255,255,0.48);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.13);
+    border-radius: 100px; padding: 10px 16px;
+    text-decoration: none; white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .cta-ghost:hover { color:#fff; background:rgba(255,255,255,0.12); }
+
+  /* ── SCROLL HINT ── */
+  .scroll-hint {
+    position: absolute; bottom:24px; right:16px;
+    z-index: 10;
+    display: flex; flex-direction:column; align-items:center; gap:6px;
+  }
+  @media (min-width:768px) { .scroll-hint { right:32px; } }
+
+  .sh-line {
+    width:1px; height:36px;
+    background:rgba(255,255,255,0.09);
+    overflow:hidden; position:relative;
+  }
+  .sh-fill {
+    position:absolute; top:-36px; left:0;
+    width:100%; height:36px;
+    background:linear-gradient(to bottom,transparent,#a78bfa);
+    animation:shA 2.2s ease-in-out infinite;
+  }
+  @keyframes shA { 0%{top:-36px;opacity:0} 20%{opacity:1} 100%{top:36px;opacity:0} }
+
+  .sh-txt {
+    font-size:8.5px; font-weight:600;
+    letter-spacing:0.2em; text-transform:uppercase;
+    color:rgba(255,255,255,0.18);
+    writing-mode:vertical-rl;
   }
 </style>
