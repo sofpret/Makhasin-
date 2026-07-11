@@ -34,7 +34,7 @@ const projects = [
 
     <div class="section-divider" aria-hidden="true"></div>
 
-    <section style="background:linear-gradient(180deg,#f0ecff 0%,#e8f4ff 100%);padding:80px 0 100px">
+    <section class="projects-section">
       <div class="section-wrap">
         <div class="projects-grid">
           {projects.map((p, i) => (
@@ -104,6 +104,8 @@ const projects = [
     line-height: 1.75;
   }
 
+  .projects-section { background: var(--bg-2); padding: 80px 0 100px; transition: background 0.3s; }
+
   .projects-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -129,7 +131,7 @@ const projects = [
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.18em;
-    color: #a89cc0;
+    color: var(--text-4);
   }
 
   .project-status {
@@ -149,7 +151,7 @@ const projects = [
     font-family: "Syne", sans-serif;
     font-size: 16px;
     font-weight: 700;
-    color: #1a1035;
+    color: var(--text-1);
     letter-spacing: -0.02em;
     line-height: 1.25;
   }
@@ -157,7 +159,7 @@ const projects = [
   .project-desc {
     font-size: 13px;
     line-height: 1.75;
-    color: #6b6080;
+    color: var(--text-3);
     flex: 1;
   }
 

@@ -108,6 +108,16 @@ const skills = [
     transition: background 0.3s;
   }
 
+  .tl-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 50% 40% at 30% 20%, rgba(124,58,237,0.04) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 30% at 70% 80%, rgba(34,211,238,0.03) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
   .tl-inner {
     max-width: 820px;
     margin: 0 auto;

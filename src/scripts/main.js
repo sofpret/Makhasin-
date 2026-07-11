@@ -1,25 +1,17 @@
-// main.js — opsional, efek tambahan
-// Aktifkan fungsi yang diperlukan di bawah
-
-/**
- * Custom cursor — titik merah kecil yang mengikuti mouse
- * Dipanggil otomatis di bawah, hanya aktif di desktop
- */
 function initCursor() {
-  if (window.matchMedia("(pointer: coarse)").matches) return; // skip mobile/touch
+  if (window.matchMedia("(pointer: coarse)").matches) return;
 
   const dot = document.createElement("div");
   dot.style.cssText = `
     position: fixed;
     width: 6px;
     height: 6px;
-    background: #dc1414;
+    background: #7c3aed;
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
     transition: left 0.06s ease, top 0.06s ease;
-    mix-blend-mode: normal;
   `;
 
   const ring = document.createElement("div");
@@ -27,7 +19,7 @@ function initCursor() {
     position: fixed;
     width: 28px;
     height: 28px;
-    border: 1px solid rgba(220,20,20,0.4);
+    border: 1px solid rgba(124,58,237,0.4);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9998;
@@ -43,28 +35,52 @@ function initCursor() {
   document.addEventListener("mousemove", (e) => {
     mx = e.clientX;
     my = e.clientY;
-    dot.style.left  = mx + "px";
-    dot.style.top   = my + "px";
+    dot.style.left = mx + "px";
+    dot.style.top = my + "px";
     ring.style.left = mx + "px";
-    ring.style.top  = my + "px";
+    ring.style.top = my + "px";
   });
 
-  // Besar saat hover interactive element
-  const targets = "a, button, .card, .contact-item, .tl-item, .project-card, .interest-card";
+  const targets = "a, button, .card, .social-item, .tl-item, .project-card, .interest-card, .chip";
   document.querySelectorAll(targets).forEach((el) => {
     el.addEventListener("mouseenter", () => {
-      ring.style.width   = "44px";
-      ring.style.height  = "44px";
+      ring.style.width = "44px";
+      ring.style.height = "44px";
       ring.style.opacity = "0.7";
     });
     el.addEventListener("mouseleave", () => {
-      ring.style.width   = "28px";
-      ring.style.height  = "28px";
+      ring.style.width = "28px";
+      ring.style.height = "28px";
       ring.style.opacity = "1";
     });
   });
 }
 
+function initSmoothReveal() {
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.style.opacity = "1";
+            e.target.style.transform = "translateY(0)";
+            observer.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+
+    document.querySelectorAll(".fade-up").forEach((el) => {
+      el.style.opacity = "0";
+      el.style.transform = "translateY(24px)";
+      el.style.transition = "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)";
+      observer.observe(el);
+    });
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initCursor();
+  initSmoothReveal();
 });

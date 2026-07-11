@@ -20,9 +20,8 @@ const {
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
 
-    <!-- Dark mode: set sebelum render biar ga flicker -->
     <script is:inline>
       (function() {
         const saved = localStorage.getItem("theme");
@@ -35,32 +34,30 @@ const {
   <body>
     <slot />
 
+    <script src="/src/scripts/main.js"></script>
+
     <script>
-      // ── DARK MODE TOGGLE ─────────────────────
       window.__toggleTheme = function() {
         const current = document.documentElement.getAttribute("data-theme");
-        const next    = current === "dark" ? "light" : "dark";
+        const next = current === "dark" ? "light" : "dark";
         document.documentElement.setAttribute("data-theme", next);
         localStorage.setItem("theme", next);
-        // Update icon di navbar
         document.querySelectorAll(".theme-icon-dark").forEach(el => {
-          (el as HTMLElement).style.display = next === "dark" ? "none" : "block";
+          el.style.display = next === "dark" ? "none" : "block";
         });
         document.querySelectorAll(".theme-icon-light").forEach(el => {
-          (el as HTMLElement).style.display = next === "dark" ? "block" : "none";
+          el.style.display = next === "dark" ? "block" : "none";
         });
       };
 
-      // Set initial icon state
       const initTheme = document.documentElement.getAttribute("data-theme");
       document.querySelectorAll(".theme-icon-dark").forEach(el => {
-        (el as HTMLElement).style.display = initTheme === "dark" ? "none" : "block";
+        el.style.display = initTheme === "dark" ? "none" : "block";
       });
       document.querySelectorAll(".theme-icon-light").forEach(el => {
-        (el as HTMLElement).style.display = initTheme === "dark" ? "block" : "none";
+        el.style.display = initTheme === "dark" ? "block" : "none";
       });
 
-      // ── REVEAL ON SCROLL ─────────────────────
       const revealObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((e) => {
@@ -74,17 +71,14 @@ const {
       );
       document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
 
-      // ── TYPEWRITER ON SCROLL ─────────────────
-      function typewrite(el: Element) {
-        const text    = (el as HTMLElement).dataset.text || el.textContent || "";
-        const speed   = parseInt((el as HTMLElement).dataset.speed || "38");
+      function typewrite(el) {
+        const text = el.dataset.text || el.textContent || "";
+        const speed = parseInt(el.dataset.speed || "38");
         el.textContent = "";
-        (el as HTMLElement).style.opacity = "1";
+        el.style.opacity = "1";
 
-        // Add cursor
         const cursor = document.createElement("span");
         cursor.className = "tw-cursor";
-        cursor.style.height = window.getComputedStyle(el).fontSize;
         el.appendChild(cursor);
 
         let i = 0;
@@ -113,12 +107,11 @@ const {
       );
 
       document.querySelectorAll(".typewriter").forEach((el) => {
-        // Simpan teks asli ke data-text, kosongkan dulu
-        if (!(el as HTMLElement).dataset.text) {
-          (el as HTMLElement).dataset.text = el.textContent?.trim() || "";
+        if (!el.dataset.text) {
+          el.dataset.text = el.textContent?.trim() || "";
         }
         el.textContent = "";
-        (el as HTMLElement).classList.add("tw-ready");
+        el.classList.add("tw-ready");
         twObserver.observe(el);
       });
     </script>

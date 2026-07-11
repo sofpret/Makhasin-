@@ -23,7 +23,7 @@ import Footer from "../components/Footer.astro";
     <div class="section-divider" aria-hidden="true"></div>
 
     <!-- Bio -->
-    <section class="about-section" style="background:#f0ecff">
+    <section class="about-section">
       <div class="section-wrap">
         <div class="about-bio-grid">
           <div class="reveal">
@@ -57,7 +57,7 @@ import Footer from "../components/Footer.astro";
     </section>
 
     <!-- Interests -->
-    <section style="background:linear-gradient(180deg,#f0ecff 0%,#e8f4ff 100%);padding:80px 0">
+    <section class="interests-section">
       <div class="section-wrap">
         <div class="section-tag reveal">Bidang Minat</div>
         <h2 class="about-section-title reveal d1" style="margin-bottom:40px">
@@ -123,7 +123,9 @@ import Footer from "../components/Footer.astro";
   }
   .page-h1 em { font-style: normal; color: #22d3ee; }
 
-  /* Bio */
+  .about-section { background: var(--bg); transition: background 0.3s; }
+  .interests-section { background: var(--bg-2); padding: 80px 0; transition: background 0.3s; }
+
   .about-bio-grid {
     display: flex;
     flex-direction: column;
@@ -142,20 +144,19 @@ import Footer from "../components/Footer.astro";
 
   .about-section-title {
     font-size: clamp(28px, 5vw, 44px);
-    color: #1a1035;
+    color: var(--text-1);
     margin-top: 8px;
   }
-  .about-section-title em { font-style: normal; color: #7c3aed; }
+  .about-section-title em { font-style: normal; color: var(--violet); }
 
   .about-lead {
     font-size: 16px;
     font-weight: 500;
     line-height: 1.8;
-    color: #4a3f72;
+    color: var(--text-2);
     margin-bottom: 18px;
   }
 
-  /* Interests */
   .interests-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -177,14 +178,14 @@ import Footer from "../components/Footer.astro";
     text-transform: uppercase;
     margin-bottom: 14px;
   }
-  .int-num--violet { color: #7c3aed; }
-  .int-num--cyan   { color: #0891b2; }
+  .int-num--violet { color: var(--violet); }
+  .int-num--cyan   { color: var(--cyan-bright); }
 
   .int-title {
     font-family: "Syne", sans-serif;
     font-size: 17px;
     font-weight: 700;
-    color: #1a1035;
+    color: var(--text-1);
     margin-bottom: 10px;
     letter-spacing: -0.02em;
     line-height: 1.25;
@@ -193,6 +194,6 @@ import Footer from "../components/Footer.astro";
   .int-desc {
     font-size: 13.5px;
     line-height: 1.75;
-    color: #6b6080;
+    color: var(--text-3);
   }
 </style>

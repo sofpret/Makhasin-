@@ -126,6 +126,17 @@ const marqueeText = "NETWORK ENGINEER · CISCO · MIKROTIK · LINUX · TCP/IP ·
     justify-content: flex-end;
   }
 
+  .cover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(124,58,237,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 20%, rgba(34,211,238,0.04) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
   /* ── MARQUEE ── */
   .marquee-layer {
     position: absolute;
